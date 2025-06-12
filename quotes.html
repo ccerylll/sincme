@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker | SincMe.id</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body class="font-poppins bg-[#F2F2F2] text-gray-800">
+    <!-- Mobile Bottom Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around items-center py-3 z-50">
+        <a href="dashboard.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="journal.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-book text-xl"></i>
+            <span class="text-xs mt-1">Journal</span>
+        </a>
+        <a href="mood.html" class="text-[#4A90E2] flex flex-col items-center">
+            <i class="fas fa-smile text-xl"></i>
+            <span class="text-xs mt-1">Mood</span>
+        </a>
+        <a href="stories.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-users text-xl"></i>
+            <span class="text-xs mt-1">Community</span>
+        </a>
+        <a href="profile.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-xs mt-1">Profile</span>
+        </a>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
+        <div class="flex items-center mb-10">
+            <!-- <img src="assets/images/logo.png" alt="SincMe.id Logo" class="h-8 mr-2"> -->
+            <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id</span>
+        </div>
+        
+        <div class="flex-1">
+            <nav class="space-y-4">
+                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-book mr-3"></i>
+                    <span>Journal</span>
+                </a>
+                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-smile mr-3"></i>
+                    <span>Mood Tracker</span>
+                </a>
+                <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-users mr-3"></i>
+                    <span>Community</span>
+                </a>
+                <a href="quotes.html" class="flex items-center p-3 rounded-lg bg-[#F2F2F2] text-[#4A90E2]">
+                    <i class="fas fa-quote-left mr-3"></i>
+                    <span>Daily Quotes</span>
+                </a>
+                <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-book-open mr-3"></i>
+                    <span>Education</span>
+                </a>
+                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-robot mr-3"></i>
+                    <span>Chatbot</span>
+                </a>
+            </nav>
+        </div>
+        
+            <div class="pt-4 border-t border-gray-200">
+            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <i class="fas fa-user mr-3"></i>
+                <span id="profileSidebarLabel">Profile</span>
+            </a>
+            </div>
+            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <i class="fas fa-sign-out-alt mr-3"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="md:ml-64 pb-16 md:pb-0">
+        <!-- Top Bar -->
+        <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-semibold text-gray-800">Daily quotes</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-[#F2F2F2]">
+                    <i class="fas fa-bell text-gray-600"></i>
+                </button>
+        </header>
+
+  <main class="p-6 mt-6">
+   <!-- Quote of the Day -->
+<div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+  <h2 class="text-xl font-medium mb-4">Quote Hari Ini</h2>
+  <div class="space-y-4">
+    <!-- Quote 1 -->
+    <div class="border-b border-gray-200 pb-4">
+      <div class="bg-[#F2F2F2] rounded-lg p-4 relative">
+        <div class="absolute top-2 left-2 text-3xl text-gray-300">“</div>
+        <p class="text-gray-700 italic pl-6">
+          Jangan pernah meremehkan langkah kecil, karena itu tetap membawamu maju.
+        </p>
+        <div class="text-right mt-2 text-sm text-gray-500">- SincMe.id Team</div>
+      </div>
+    </div>
+
+    <!-- Favorite Quotes -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h2 class="text-xl font-medium mb-4">Quote Favorit</h2>
+      <div
+        class="bg-[#F2F2F2] rounded-lg p-6 text-gray-500 italic flex items-center justify-center"
+        style="height: 150px;"
+      >
+        Kamu belum memiliki quotes favorit.
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+<script src="assets/js/quotes.js"></script>
+</html>

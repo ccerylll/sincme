@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SincMe.id</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+
+<!-- Daily Quote Popup -->
+<div id="quotePopup" class="fixed bottom-6 right-6 w-80 bg-white rounded-xl shadow-lg z-50 transform transition-all duration-300 translate-y-4 opacity-0 invisible">
+    <div class="p-5">
+        <div class="flex justify-between items-start mb-3">
+            <h3 class="font-medium text-[#4A90E2]">Quote Harian</h3>
+            <button id="closeQuotePopup" class="text-gray-400 hover:text-gray-600">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="bg-[#F2F2F2] rounded-lg p-4 relative mb-3">
+            <div class="absolute top-2 left-2 text-3xl text-gray-300">“</div>
+            <p id="popupQuoteText" class="text-gray-700 italic pl-6">Tidak apa-apa untuk tidak baik-baik saja. Yang penting kamu jujur dengan dirimu sendiri.</p>
+            <div class="text-right mt-2 text-sm text-gray-500" id="popupQuoteAuthor">- SincMe.id Team</div>
+        </div>
+        <div class="flex justify-between items-center">
+            <button id="addToFavorites" class="text-gray-500 hover:text-[#4A90E2] flex items-center">
+                <i class="far fa-heart mr-1"></i>
+                <span class="text-sm">Simpan</span>
+            </button>
+            <div class="flex space-x-2">
+                <button class="text-gray-500 hover:text-[#4A90E2] p-1">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+                <button class="text-gray-500 hover:text-[#4A90E2] p-1">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="bg-[#F2F2F2] px-4 py-2 rounded-b-xl flex justify-between items-center">
+        <span class="text-xs text-gray-500">Tampilkan setiap hari</span>
+        <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="dailyQuoteToggle" class="sr-only peer" checked>
+            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#4A90E2]"></div>
+        </label>
+    </div>
+</div>
+
+<body class="font-poppins bg-[#F2F2F2] text-gray-800">
+    <!-- Mobile Bottom Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around items-center py-3 z-50">
+        <a href="dashboard.html" class="text-[#4A90E2] flex flex-col items-center">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="journal.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-book text-xl"></i>
+            <span class="text-xs mt-1">Journal</span>
+        </a>
+        <a href="mood.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-smile text-xl"></i>
+            <span class="text-xs mt-1">Mood</span>
+        </a>
+        <a href="stories.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-users text-xl"></i>
+            <span class="text-xs mt-1">Community</span>
+        </a>
+        <a href="profile.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-xs mt-1">Profile</span>
+        </a>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
+        <div class="flex items-center mb-10">
+            <!-- <img src="assets/images/logo.png" alt="SincMe.id
+ Logo" class="h-8 mr-2"> -->
+            <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id
+</span>
+        </div>
+        
+        <div class="flex-1">
+            <nav class="space-y-4">
+                <a href="dashboard.html" class="flex items-center p-3 rounded-lg bg-[#F2F2F2] text-[#4A90E2]">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-book mr-3"></i>
+                    <span>Journal</span>
+                </a>
+                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-smile mr-3"></i>
+                    <span>Mood Tracker</span>
+                </a>
+                <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-users mr-3"></i>
+                    <span>Community</span>
+                </a>
+                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-quote-left mr-3"></i>
+                    <span>Daily Quotes</span>
+                </a>
+                <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-book-open mr-3"></i>
+                    <span>Education</span>
+                </a>
+                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-robot mr-3"></i>
+                    <span>Chatbot</span>
+                </a>
+            </nav>
+        </div>
+        
+            <div class="pt-4 border-t border-gray-200">
+            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <i class="fas fa-user mr-3"></i>
+                <span id="profileSidebarLabel">Profile</span>
+            </a>
+            </div>
+
+            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <i class="fas fa-sign-out-alt mr-3"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="md:ml-64 pb-16 md:pb-0">
+        <!-- Top Bar -->
+        <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-semibold text-gray-800">Dashboard</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-[#F2F2F2]">
+                    <i class="fas fa-bell text-gray-600"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <main class="p-6">
+            <!-- Welcome Section -->
+            <div class="bg-gradient-to-r from-[#AEE3F3] to-[#CDEAC0] rounded-xl p-6 mb-6 text-white">
+                <h2 class="text-2xl text-blue-400 font-semibold mb-2">Halo, User 👋</h2>
+                <p class="mb-4 text-black">Bagaimana perasaanmu hari ini?</p>
+                <div class="flex space-x-3">
+                    <button class="bg-white text-black px-4 py-2 rounded-lg font-medium">Check-in Mood</button>
+                    <button class="border border-white text-black px-4 py-2 rounded-lg font-medium">Tulis Journal</button>
+                </div>
+            </div>
+
+            <!-- Mood Summary -->
+            <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-medium">Mood Minggu Ini</h3>
+                    <a href="mood.html" class="text-sm text-[#4A90E2]">Lihat Detail</a>
+                </div>
+                <div class="h-40">
+                    <canvas id="moodChart"></canvas>
+                </div>
+                <div class="mt-4 text-sm text-gray-600">
+                    <p>Rata-rata mood kamu minggu ini: <span class="font-medium text-[#4A90E2]">Cukup Baik</span></p>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <a href="journal.html" class="bg-white rounded-xl p-4 shadow-sm flex flex-col items-center justify-center hover:shadow-md transition">
+                    <div class="bg-[#AEE3F3] w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-book text-xl text-[#4A90E2]"></i>
+                    </div>
+                    <span class="text-sm font-medium">Jurnal</span>
+                </a>
+                <a href="mood.html" class="bg-white rounded-xl p-4 shadow-sm flex flex-col items-center justify-center hover:shadow-md transition">
+                    <div class="bg-[#CDEAC0] w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-smile text-xl text-green-600"></i>
+                    </div>
+                    <span class="text-sm font-medium">Mood Tracker</span>
+                </a>
+                <a href="stories.html" class="bg-white rounded-xl p-4 shadow-sm flex flex-col items-center justify-center hover:shadow-md transition">
+                    <div class="bg-[#AEE3F3] w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-users text-xl text-[#4A90E2]"></i>
+                    </div>
+                    <span class="text-sm font-medium">Cerita</span>
+                </a>
+                <a href="chatbot.html" class="bg-white rounded-xl p-4 shadow-sm flex flex-col items-center justify-center hover:shadow-md transition">
+                    <div class="bg-[#CDEAC0] w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-robot text-xl text-green-600"></i>
+                    </div>
+                    <span class="text-sm font-medium">Chatbot</span>
+                </a>
+            </div>
+
+            <!-- Recent Journals -->
+            <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-medium">Jurnal Terakhir</h3>
+                    <a href="journal.html" class="text-sm text-[#4A90E2]">Lihat Semua</a>
+                </div>
+                <div class="space-y-4">
+                    <div class="border-b border-gray-100 pb-4">
+                        <div class="flex justify-between items-start mb-1">
+                            <h4 class="font-medium">Hari yang Melelahkan</h4>
+                            <span class="text-xs text-gray-500">Kemarin</span>
+                        </div>
+                        <p class="text-sm text-gray-600 line-clamp-2">Hari ini sangat melelahkan dengan semua deadline yang menumpuk. Aku merasa kewalahan tapi mencoba untuk tetap tenang...</p>
+                        <div class="flex mt-2">
+                            <span class="bg-[#F2F2F2] text-xs px-2 py-1 rounded-full mr-2">#stres</span>
+                            <span class="bg-[#F2F2F2] text-xs px-2 py-1 rounded-full">#pekerjaan</span>
+                        </div>
+                    </div>
+                    <div class="border-b border-gray-100 pb-4">
+                        <div class="flex justify-between items-start mb-1">
+                            <h4 class="font-medium">Momen Bahagia</h4>
+                            <span class="text-xs text-gray-500">2 hari lalu</span>
+                        </div>
+                        <p class="text-sm text-gray-600 line-clamp-2">Akhirnya bertemu dengan teman-teman setelah sekian lama. Tertawa bersama membuatku merasa lebih ringan...</p>
+                        <div class="flex mt-2">
+                            <span class="bg-[#F2F2F2] text-xs px-2 py-1 rounded-full mr-2">#bahagia</span>
+                            <span class="bg-[#F2F2F2] text-xs px-2 py-1 rounded-full">#teman</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote of the Day -->
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-medium">Quote Hari Ini</h3>
+                    <!-- <button class="text-sm text-[#4A90E2]">Refresh</button> -->
+                </div>
+                <div class="bg-[#F2F2F2] rounded-lg p-4 relative">
+                    <div class="absolute top-2 left-2 text-4xl text-gray-300">“</div>
+                    <p class="text-gray-700 italic pl-8">Tidak apa-apa untuk tidak baik-baik saja. Yang penting kamu jujur dengan dirimu sendiri dan mengambil langkah kecil untuk merawat diri.</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-sm text-gray-500">- SincMe.id
+ Team</span>
+                        <div class="flex space-x-2">
+                            <button class="text-gray-500 hover:text-[#4A90E2]">
+                                <i class="far fa-copy"></i>
+                            </button>
+                            <button class="text-gray-500 hover:text-[#4A90E2]">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Mood Chart
+        const ctx = document.getElementById('moodChart').getContext('2d');
+        const moodChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
+                datasets: [{
+                    label: 'Mood',
+                    data: [3, 4, 2, 3, 4, 5, 4],
+                    backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                    borderColor: 'rgba(74, 144, 226, 1)',
+                    borderWidth: 2,
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 1,
+                        max: 5,
+                        ticks: {
+                            callback: function(value) {
+                                const moods = ['', 'Sangat Buruk', 'Buruk', 'Netral', 'Baik', 'Sangat Baik'];
+                                return moods[value];
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const moods = ['', 'Sangat Buruk', 'Buruk', 'Netral', 'Baik', 'Sangat Baik'];
+                                return moods[context.raw];
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+                document.addEventListener("DOMContentLoaded", () => {
+    const name = localStorage.getItem("name");
+    const profileLabel = document.getElementById("profileSidebarLabel");
+
+    if (profileLabel) {
+      if (name && name.trim() !== "") {
+        profileLabel.textContent = name;
+      } else {
+        profileLabel.textContent = "Profile";
+      }
+    }
+  });
+
+    </script>
+</body>
+</html>

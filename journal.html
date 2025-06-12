@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal | SincMe.id</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .journal-entry {
+            transition: all 0.2s ease;
+        }
+        .journal-entry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .calendar-day.has-entry {
+            position: relative;
+        }
+        .calendar-day.has-entry::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: #4A90E2;
+        }
+        .mood-option input:checked + div {
+            box-shadow: 0 0 0 2px currentColor;
+        }
+    </style>
+</head>
+<body class="font-poppins bg-[#F2F2F2] text-gray-800">
+    <!-- Mobile Bottom Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around items-center py-3 z-50">
+        <a href="dashboard.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="journal.html" class="text-[#4A90E2] flex flex-col items-center">
+            <i class="fas fa-book text-xl"></i>
+            <span class="text-xs mt-1">Journal</span>
+        </a>
+        <a href="mood.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-smile text-xl"></i>
+            <span class="text-xs mt-1">Mood</span>
+        </a>
+        <a href="stories.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-users text-xl"></i>
+            <span class="text-xs mt-1">Community</span>
+        </a>
+        <a href="profile.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-xs mt-1">Profile</span>
+        </a>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
+        <div class="flex items-center mb-10">
+            <!-- <img src="assets/images/logo.png" alt="SincMe.id Logo" class="h-8 mr-2"> -->
+            <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id</span>
+        </div>
+        
+        <div class="flex-1">
+            <nav class="space-y-4">
+                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="journal.html" class="flex items-center p-3 rounded-lg bg-[#F2F2F2] text-[#4A90E2]">
+                    <i class="fas fa-book mr-3"></i>
+                    <span>Journal</span>
+                </a>
+                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-smile mr-3"></i>
+                    <span>Mood Tracker</span>
+                </a>
+                <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-users mr-3"></i>
+                    <span>Community</span>
+                </a>
+                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-quote-left mr-3"></i>
+                    <span>Daily Quotes</span>
+                </a>
+                <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-book-open mr-3"></i>
+                    <span>Education</span>
+                </a>
+                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-robot mr-3"></i>
+                    <span>Chatbot</span>
+                </a>
+            </nav>
+        </div>
+        
+            <div class="pt-4 border-t border-gray-200">
+            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <i class="fas fa-user mr-3"></i>
+                <span id="profileSidebarLabel">Profile</span>
+            </a>
+            </div>
+            
+            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <i class="fas fa-sign-out-alt mr-3"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="md:ml-64 pb-16 md:pb-0">
+        <!-- Top Bar -->
+        <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-semibold text-gray-800">Journal</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-[#F2F2F2]">
+                    <i class="fas fa-bell text-gray-600"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Journal Content -->
+        <main class="p-6">
+            <!-- New Journal Button -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-medium">Catatan Harian</h2>
+                <button id="newJournalBtn" class="bg-[#4A90E2] hover:bg-[#3A7BC8] text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Baru
+                </button>
+            </div>
+
+            <!-- Journal Calendar -->
+            <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium">Kalender Journal</h3>
+                    <div class="flex items-center space-x-2">
+                        <button id="prevMonth" class="p-1 rounded-full hover:bg-[#F2F2F2]">
+                            <i class="fas fa-chevron-left text-gray-600"></i>
+                        </button>
+                        <span id="currentMonthYear" class="font-medium">Juni 2023</span>
+                        <button id="nextMonth" class="p-1 rounded-full hover:bg-[#F2F2F2]">
+                            <i class="fas fa-chevron-right text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-7 gap-2 text-center mb-2">
+                    <div class="text-sm font-medium text-gray-500">M</div>
+                    <div class="text-sm font-medium text-gray-500">S</div>
+                    <div class="text-sm font-medium text-gray-500">S</div>
+                    <div class="text-sm font-medium text-gray-500">R</div>
+                    <div class="text-sm font-medium text-gray-500">K</div>
+                    <div class="text-sm font-medium text-gray-500">J</div>
+                    <div class="text-sm font-medium text-gray-500">S</div>
+                </div>
+                <div id="calendarDays" class="grid grid-cols-7 gap-2 text-center">
+                    <!-- Calendar days will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Journal Entries -->
+            <div id="journalEntries" class="space-y-4">
+                <!-- Journal entries will be loaded here -->
+            </div>
+
+            <!-- No Entries Message -->
+            <div id="noEntriesMessage" class="bg-white rounded-xl p-8 text-center shadow-sm hidden">
+                <!-- <img src="assets/images/empty-journal.png" alt="No entries" class="w-32 h-32 mx-auto mb-4"> -->
+                <h3 class="text-lg font-medium text-[#333446] mb-2">Belum ada journal</h3>
+                <p class="text-gray-600 mb-4">Mulai menulis journal pertamamu untuk melacak perasaan dan pemikiranmu</p>
+                <button id="createFirstJournal" class="bg-[#B8CFCE] hover:bg-[#3A7BC8] text-[#333446] px-6 py-2 rounded-lg font-medium">
+                    Buat Jurnal Pertama
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- New/Edit Journal Modal -->
+    <div id="journalModal" class="fixed inset-0 bg-[#00000080] flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="modalTitle" class="text-xl font-medium">Journal Baru</h3>
+                <button id="closeJournalModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="journalForm">
+                <input type="hidden" id="journalId">
+                <div class="mb-4">
+                    <label for="journalDate" class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label>
+                    <input type="date" id="journalDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:border-transparent">
+                </div>
+                <div class="mb-4">
+                    <label for="journalTitle" class="block text-sm font-medium text-gray-700 mb-1">Judul</label>
+                    <input type="text" id="journalTitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:border-transparent" placeholder="Bagaimana perasaanmu hari ini?">
+                </div>
+                <div class="mb-4">
+                    <label for="journalContent" class="block text-sm font-medium text-gray-700 mb-1">Isi Journal</label>
+                    <textarea id="journalContent" rows="8" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:border-transparent" placeholder="Tuliskan apa yang kamu rasakan dan pikirkan hari ini..."></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mood Hari Ini</label>
+                    <div class="flex space-x-4">
+                    <!-- Sangat Buruk -->
+                    <label class="flex flex-col items-center cursor-pointer">
+                        <input type="radio" name="mood" value="1" class="hidden">
+                        <div class="mood-option w-12 h-12 rounded-full bg-red-100 text-red-500 flex items-center justify-center transition-all duration-200 hover:shadow-md hover:scale-110">
+                        <span class="text-2xl">😭</span>
+                        </div>
+                        <span class="text-xs mt-1">Sangat Buruk</span>
+                    </label>
+
+                    <!-- Buruk -->
+                    <label class="flex flex-col items-center cursor-pointer">
+                        <input type="radio" name="mood" value="2" class="hidden">
+                        <div class="mood-option w-12 h-12 rounded-full bg-pink-100 text-pink-500 flex items-center justify-center transition-all duration-200 hover:shadow-md hover:scale-110">
+                        <span class="text-2xl">😞</span>
+                        </div>
+                        <span class="text-xs mt-1">Buruk</span>
+                    </label>
+
+                    <!-- Netral -->
+                    <label class="flex flex-col items-center cursor-pointer">
+                        <input type="radio" name="mood" value="3" class="hidden">
+                        <div class="mood-option w-12 h-12 rounded-full bg-yellow-100 text-yellow-500 flex items-center justify-center transition-all duration-200 hover:shadow-md hover:scale-110">
+                        <span class="text-2xl">😐</span>
+                        </div>
+                        <span class="text-xs mt-1">Netral</span>
+                    </label>
+
+                    <!-- Baik -->
+                    <label class="flex flex-col items-center cursor-pointer">
+                        <input type="radio" name="mood" value="4" class="hidden">
+                        <div class="mood-option w-12 h-12 rounded-full bg-green-100 text-green-500 flex items-center justify-center transition-all duration-200 hover:shadow-md hover:scale-110">
+                        <span class="text-2xl">😊</span>
+                        </div>
+                        <span class="text-xs mt-1">Baik</span>
+                    </label>
+
+                    <!-- Sangat Baik -->
+                    <label class="flex flex-col items-center cursor-pointer">
+                        <input type="radio" name="mood" value="5" class="hidden">
+                        <div class="mood-option w-12 h-12 rounded-full bg-blue-100 text-blue-500 flex items-center justify-center transition-all duration-200 hover:shadow-md hover:scale-110">
+                        <span class="text-2xl">😁</span>
+                        </div>
+                        <span class="text-xs mt-1">Sangat Baik</span>
+                    </label>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="journalTags" class="block text-sm font-medium text-gray-700 mb-1">Tag</label>
+                    <input type="text" id="journalTags" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:border-transparent" placeholder="Tambahkan tag (pisahkan dengan koma)">
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelJournal" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50">Batal</button>
+                    <button type="submit" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-[#00000080] flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-medium">Hapus Journal</h3>
+                <button id="closeDeleteModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p class="text-gray-700 mb-6">Apakah kamu yakin ingin menghapus journal ini? Tindakan ini tidak dapat dibatalkan.</p>
+            <div class="flex justify-end space-x-3">
+                <button type="button" id="cancelDelete" class="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50">Batal</button>
+                <button type="button" id="confirmDelete" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/journal.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SincMe.id</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+
+
+<body class="font-poppins bg-[#F2F2F2] text-gray-800">
+    <!-- Mobile Bottom Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around items-center py-3 z-50">
+        <a href="dashboard.html" class="text-[#4A90E2] flex flex-col items-center">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="journal.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-book text-xl"></i>
+            <span class="text-xs mt-1">Journal</span>
+        </a>
+        <a href="mood.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-smile text-xl"></i>
+            <span class="text-xs mt-1">Mood</span>
+        </a>
+        <a href="stories.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-users text-xl"></i>
+            <span class="text-xs mt-1">Community</span>
+        </a>
+        <a href="profile.html" class="text-gray-500 flex flex-col items-center">
+            <i class="fas fa-user text-xl"></i>
+            <span class="text-xs mt-1">Profile</span>
+        </a>
+    </div>
+
+    <!-- Desktop Sidebar -->
+    <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
+        <div class="flex items-center mb-10">
+            <!-- <img src="assets/images/logo.png" alt="SincMe.id
+ Logo" class="h-8 mr-2"> -->
+            <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id
+</span>
+        </div>
+        
+        <div class="flex-1">
+            <nav class="space-y-4">
+                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-book mr-3"></i>
+                    <span>Journal</span>
+                </a>
+                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-smile mr-3"></i>
+                    <span>Mood Tracker</span>
+                </a>
+                <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-users mr-3"></i>
+                    <span>Community</span>
+                </a>
+                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-quote-left mr-3"></i>
+                    <span>Daily Quotes</span>
+                </a>
+               <a href="education.html" class="flex items-center p-3 rounded-lg bg-[#F2F2F2] text-[#4A90E2]">
+                    <i class="fas fa-book-open mr-3"></i>
+                    <span>Education</span>
+                </a>
+
+                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                    <i class="fas fa-robot mr-3"></i>
+                    <span>Chatbot</span>
+                </a>
+            </nav>
+        </div>      
+            <div class="pt-4 border-t border-gray-200">
+            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <i class="fas fa-user mr-3"></i>
+                <span id="profileSidebarLabel">Profile</span>
+            </a>
+            </div>
+
+            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <i class="fas fa-sign-out-alt mr-3"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+    <div class="md:ml-64 pb-16 md:pb-0">
+      <!-- Top Bar -->
+      <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
+          <div>
+              <h1 class="text-2xl font-semibold text-gray-800">Education</h1>
+          </div>
+          <div class="flex items-center space-x-4">
+              <button class="p-2 rounded-full hover:bg-[#F2F2F2]">
+                  <i class="fas fa-bell text-gray-600"></i>
+              </button>
+          </div>
+      </header>
+    <!-- Main Content -->
+     <!-- Main Content -->
+      
+<main class=" p-6 space-y-8 min-h-screen">
+<section class=" relative">
+  <h2 class="text-3xl font-semibold mb-8 text-[#4A90E2]">Berita Edukasi Mental Health</h2>
+
+  <div class="relative rounded-lg shadow-lg bg-white">
+
+    <div id="articleContainer" class="p-8 " style="height: 300px; overflow: hidden; transition: height 0.4s ease;">
+      <h3 id="articleTitle" class="text-2xl font-semibold text-[#4A90E2] mb-3"></h3>
+      <p id="articleSummary" class="mb-6"></p>
+      <div id="detailContent" style="max-height: 0; overflow-y: auto; transition: max-height 0.4s ease; color: #2d3748;"></div>
+    </div>
+
+    <button id="toggleDetailBtn" class="w-full text-[#4A90E2] hover:underline font-medium">Lihat Penjelasan Lengkap</button>
+
+    <button id="prevBtn" aria-label="Previous article" 
+      class="absolute top-1/2 left-2 -translate-y-1/2 bg-[#4A90E2] text-white rounded-full w-12 h-12 flex items-center justify-center shadow-md hover:bg-[#357ABD] focus:outline-none">
+      &#8249;
+    </button>
+    <button id="nextBtn" aria-label="Next article" 
+      class="absolute top-1/2 right-2 -translate-y-1/2 bg-[#4A90E2] text-white rounded-full w-12 h-12 flex items-center justify-center shadow-md hover:bg-[#357ABD] focus:outline-none">
+      &#8250;
+    </button>
+  </div>
+</section>
+<script src="assets/js/education.js"></script>
+    <section>
+        <h2 class="text-2xl font-semibold mb-4 text-[#4A90E2]">Self Development</h2>
+        <div class="space-y-4">
+            <article class="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition">
+                <h3 class="text-xl font-semibold mb-2">Membangun Kebiasaan Positif untuk Mental yang Lebih Sehat</h3>
+                <p>Membangun rutinitas harian yang sehat seperti meditasi dan olahraga ringan dapat memberikan efek positif pada kesehatan mental Anda.</p>
+            </article>
+            <article class="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition">
+                <h3 class="text-xl font-semibold mb-2">Cara Mengelola Emosi untuk Meningkatkan Kualitas Hidup</h3>
+                <p>Mempelajari teknik pengelolaan emosi seperti journaling dan komunikasi efektif membantu Anda lebih memahami dan mengendalikan perasaan.</p>
+            </article>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="text-2xl font-semibold mb-4 text-[#4A90E2]">Edukasi tentang AI dan Psikolog/Terapi</h2>
+        <p class="mb-4">Kecerdasan buatan (AI) semakin banyak digunakan dalam bidang kesehatan mental, seperti chatbot dan aplikasi pendukung terapi. Namun, AI bukan pengganti psikolog atau terapis profesional. AI dapat membantu memberikan dukungan awal dan informasi, tapi untuk penanganan mendalam dan diagnosis, konsultasi langsung dengan tenaga kesehatan mental tetap penting.</p>
+        <p>Gunakan teknologi AI sebagai alat bantu, bukan pengganti. Jika Anda mengalami masalah mental serius, jangan ragu untuk mencari bantuan dari ahli.</p>
+    </section>
+</main>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/main.js"></script>
+ 
+</body>
+</html>
