@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const storiesContainer = document.getElementById("storiesContainer");
     const emojiToggle = document.getElementById("emojiToggle");
     const emojiPicker = document.getElementById("emojiPicker");
-    const lockToggle = document.getElementById("lockToggle");
+
 
     if (!localStorage.getItem("currentUserId")) {
         localStorage.setItem("currentUserId", `user_${Date.now()}`);
@@ -24,13 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         postStory.disabled = storyInput.value.trim() === "";
     });
 
-    lockToggle.addEventListener("click", () => {
-        isPrivate = !isPrivate;
-        lockToggle.innerHTML = isPrivate
-            ? '<i class="fas fa-lock text-gray-700"></i>'
-            : '<i class="fas fa-lock-open text-gray-400"></i>';
-    });
-    
+
 
     postStory.addEventListener("click", () => {
         const now = new Date();
@@ -49,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
         storyInput.value = "";
         postStory.disabled = true;
         isPrivate = false;
-        lockToggle.innerHTML = '<i class="fas fa-lock-open text-gray-400"></i>';
         renderStories();
     });
 
@@ -301,7 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 saved.forEach(story => {
                     const div = document.createElement("div");
-                    div.className = "p-3 border rounded text-sm";
+                    div.className = "p-3 rounded text-sm bg-white shadow mb-3 story-card";
                     div.innerHTML = `
                         <div class="font-semibold text-[#4A90E2] mb-1">${story.name}</div>
                         <p class="text-gray-700 mt-2 break-words whitespace-pre-wrap">${story.content}</p>
