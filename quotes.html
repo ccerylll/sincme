@@ -92,7 +92,7 @@
         <!-- Top Bar -->
         <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-semibold text-gray-800">Daily quotes</h1>
+                <h1 class="text-2xl font-semibold text-gray-800">Daily Quotes</h1>
             </div>
             <div class="flex items-center space-x-4">
                 <button class="p-2 rounded-full hover:bg-[#F2F2F2]">
@@ -100,34 +100,23 @@
                 </button>
         </header>
 
-  <main class="p-6 mt-6">
-   <!-- Quote of the Day -->
-<div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
-  <h2 class="text-xl font-medium mb-4">Quote Hari Ini</h2>
-  <div class="space-y-4">
-    <!-- Quote 1 -->
-    <div class="border-b border-gray-200 pb-4">
-      <div class="bg-[#F2F2F2] rounded-lg p-4 relative">
-        <div class="absolute top-2 left-2 text-3xl text-gray-300">“</div>
-        <p class="text-gray-700 italic pl-6">
-          Jangan pernah meremehkan langkah kecil, karena itu tetap membawamu maju.
-        </p>
-        <div class="text-right mt-2 text-sm text-gray-500">- SincMe.id Team</div>
-      </div>
+        <main class="p-6 mt-6">
+            <!-- Quote of the Day -->
+            <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+              <h2 class="text-xl font-medium mb-4">Quote Hari Ini</h2>
+              <div id="quote-of-day"></div>
+            </div>
+          
+            <!-- Favorite Quotes -->
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+              <h2 class="text-xl font-medium mb-4">Quote Favorit</h2>
+              <div id="favorite-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+              <p id="no-fav-msg" class="text-gray-500 italic text-center mt-4">
+                Kamu belum memiliki quotes favorit.
+              </p>
+            </div>
+          </main>
     </div>
-
-    <!-- Favorite Quotes -->
-    <div class="bg-white rounded-xl p-6 shadow-sm">
-      <h2 class="text-xl font-medium mb-4">Quote Favorit</h2>
-      <div
-        class="bg-[#F2F2F2] rounded-lg p-6 text-gray-500 italic flex items-center justify-center"
-        style="height: 150px;"
-      >
-        Kamu belum memiliki quotes favorit.
-      </div>
-    </div>
-  </main>
-</div>
 </body>
 <script src="assets/js/quotes.js"></script>
 </html>
