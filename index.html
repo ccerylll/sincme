@@ -5,40 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SincMe.id - Safe Space</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background: #ffffff;
+            color: #333446;
+        }
+        .primary-bg { background-color: #B8CFCE; }
+        .primary-text { color: #B8CFCE; }
+        .secondary-bg { background-color: #758b96; }
+        .secondary-text { color: #758b96; }
+        .accent-bg { background-color: #9ca6bb; }
+        .accent-text { color: #9ca6bb; }
+        .main-text { color: #333446; }
+        .sincerely-font {
+            font-family: 'Pacifico', cursive;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #758b96 0%, #9ca6bb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .feature-icon {
+            background: #B8CFCE;
+            color: #333446;
+        }
+        .feature-card {
+            background: #F2F2F2;
+            border: 1.5px solid #B8CFCE;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .feature-card:hover {
+            box-shadow: 0 8px 32px 0 #B8CFCE33;
+            border-color: #9ca6bb;
+        }
+        .cta-gradient {
+            background: linear-gradient(90deg, #758b96 0%, #B8CFCE 100%);
+        }
+        .btn-primary {
+            background: #B8CFCE;
+            color: #333446;
+        }
+        .btn-primary:hover {
+            background: #9ca6bb;
+            color: #ffffff;
+        }
+        .btn-outline {
+            border: 1.5px solid #B8CFCE;
+            color: #333446;
+        }
+        .btn-outline:hover {
+            background: #F2F2F2;
+            color: #758b96;
+            border-color: #9ca6bb;
+        }
+        .footer-bg {
+            background: #F2F2F2;
+        }
+        .footer-link:hover {
+            color: #9ca6bb;
+        }
+    </style>
 </head>
-<body class="font-poppins bg-white text-gray-800">
+<body class="font-poppins main-text bg-white">
     <!-- Navbar -->
-    <nav class="bg-white shadow-sm py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-        <div class="flex items-center">
-            <img src="assets/images/logo.png" alt="SincMe.id Logo" class="h-10 mr-2">
-            <span class="text-2xl font-semibold text-[#4A90E2]">SincMe.id</span>
+    <nav class="bg-white shadow-sm py-4 px-6 flex justify-between items-center sticky top-0 z-50" style="overflow-x:visible;">
+        <div class="flex items-center" style="overflow-x:visible; min-width:0; max-width:none;">
+            <span class="text-3xl font-bold sincerely-font whitespace-nowrap block" style="overflow:visible; min-width:0; max-width:100vw; width:auto; font-weight:bold;"><b>SincMe.id</b></span>
         </div>
         <div class="hidden md:flex space-x-6">
-            <a href="#features" class="hover:text-[#4A90E2] transition">Fitur</a>
-            <a href="#testimonials" class="hover:text-[#4A90E2] transition">Testimoni</a>
-            <a href="#about" class="hover:text-[#4A90E2] transition">Tentang Kami</a>
+            <a href="#features" class="hover:text-secondary transition">Fitur</a>
+            <a href="#testimonials" class="hover:text-secondary transition">Testimoni</a>
+            <a href="#about" class="hover:text-secondary transition">Tentang Kami</a>
         </div>
         <div>
-            <a href="auth.html" class="bg-[#AEE3F3] hover:bg-[#8FD8EC] text-[#4A90E2] px-4 py-2 rounded-lg font-medium transition">Masuk</a>
+            <a href="auth.html" class="btn-primary px-4 py-2 rounded-lg font-medium transition">Masuk</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="py-16 px-6 md:py-24 bg-gradient-to-b from-[#F2F2F2] to-white">
+    <section class="py-16 px-6 md:py-24" style="background: #F2F2F2;">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-semibold mb-6 leading-tight text-[#4A90E2]">Kamu tidak sendirian dalam perjalanan ini 💙</h1>
-                <p class="text-lg mb-8 text-gray-600">SincMe.id adalah platform aman untuk Gen Z mengeksplorasi kesehatan mental, self-growth, dan menemukan komunitas yang mendukung.</p>
+                <h1 class="text-4xl md:text-5xl font-semibold mb-6 leading-tight accent-text">Kamu tidak sendirian dalam perjalanan ini 💙</h1>
+                <p class="text-lg mb-8 secondary-text">SincMe.id adalah platform aman untuk Gen Z mengeksplorasi kesehatan mental, self-growth, dan menemukan komunitas yang mendukung.</p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="auth.html?action=register" class="bg-[#4A90E2] hover:bg-[#3A7BC8] text-white px-6 py-3 rounded-lg font-medium text-center transition shadow-md">Mulai Sekarang</a>
-                    <a href="#features" class="border border-[#4A90E2] text-[#4A90E2] hover:bg-[#F2F2F2] px-6 py-3 rounded-lg font-medium text-center transition">Pelajari Fitur</a>
+                    <a href="auth.html?action=register" class="btn-primary px-6 py-3 rounded-lg font-medium text-center transition shadow-md">Mulai Sekarang</a>
+                    <a href="#features" class="btn-outline px-6 py-3 rounded-lg font-medium text-center transition">Pelajari Fitur</a>
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center">
-                <img src="assets/images/hero-illustration.png" alt="People supporting each other" class="w-full max-w-md">
+                <img src="assets/download.png" alt="People supporting each other" class="w-full max-w-md">
             </div>
         </div>
     </section>
@@ -46,84 +105,77 @@
     <!-- Features Section -->
     <section id="features" class="py-16 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-semibold text-center mb-12 text-[#4A90E2]">Fitur untuk Mendukung Perjalananmu</h2>
-            
+            <h2 class="text-3xl font-semibold text-center mb-12 accent-text">Fitur untuk Mendukung Perjalananmu</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="bg-[#F2F2F2] p-6 rounded-xl hover:shadow-md transition">
-                    <div class="bg-[#AEE3F3] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <div class="feature-card p-6 rounded-xl">
+                    <div class="feature-icon w-14 h-14 rounded-lg flex items-center justify-center mb-4">
                         <span class="text-2xl">📝</span>
                     </div>
-                    <h3 class="text-xl font-medium mb-3">Journaling</h3>
-                    <p class="text-gray-600">Ekspresikan perasaanmu dengan aman melalui jurnal digital. Dilengkapi tag emosi dan pengingat harian.</p>
+                    <h3 class="text-xl font-medium mb-3 main-text">Journaling</h3>
+                    <p class="secondary-text">Ekspresikan perasaanmu dengan aman melalui jurnal digital. Dilengkapi tag emosi dan pengingat harian.</p>
                 </div>
-                
                 <!-- Feature 2 -->
-                <div class="bg-[#F2F2F2] p-6 rounded-xl hover:shadow-md transition">
-                    <div class="bg-[#CDEAC0] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <div class="feature-card p-6 rounded-xl">
+                    <div class="feature-icon w-14 h-14 rounded-lg flex items-center justify-center mb-4" style="background:#758b96;color:#ffffff;">
                         <span class="text-2xl">😊</span>
                     </div>
-                    <h3 class="text-xl font-medium mb-3">Mood Tracker</h3>
-                    <p class="text-gray-600">Lacak perubahan mood dan dapatkan insight tentang pola emosionalmu dengan grafik yang mudah dipahami.</p>
+                    <h3 class="text-xl font-medium mb-3 main-text">Mood Tracker</h3>
+                    <p class="secondary-text">Lacak perubahan mood dan dapatkan insight tentang pola emosionalmu dengan grafik yang mudah dipahami.</p>
                 </div>
-                
                 <!-- Feature 3 -->
-                <div class="bg-[#F2F2F2] p-6 rounded-xl hover:shadow-md transition">
-                    <div class="bg-[#AEE3F3] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <div class="feature-card p-6 rounded-xl">
+                    <div class="feature-icon w-14 h-14 rounded-lg flex items-center justify-center mb-4">
                         <span class="text-2xl">💬</span>
                     </div>
-                    <h3 class="text-xl font-medium mb-3">Story Wall</h3>
-                    <p class="text-gray-600">Berbagi cerita secara semi-anonim dan dapatkan dukungan dari komunitas yang memahami.</p>
+                    <h3 class="text-xl font-medium mb-3 main-text">Story Wall</h3>
+                    <p class="secondary-text">Berbagi cerita secara semi-anonim dan dapatkan dukungan dari komunitas yang memahami.</p>
                 </div>
-                
                 <!-- Feature 4 -->
-                <div class="bg-[#F2F2F2] p-6 rounded-xl hover:shadow-md transition">
-                    <div class="bg-[#CDEAC0] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <div class="feature-card p-6 rounded-xl">
+                    <div class="feature-icon w-14 h-14 rounded-lg flex items-center justify-center mb-4" style="background:#758b96;color:#ffffff;">
                         <span class="text-2xl">🤖</span>
                     </div>
-                    <h3 class="text-xl font-medium mb-3">Chatbot Pendukung</h3>
-                    <p class="text-gray-600">Butuh teman bicara di tengah malam? Chatbot kami siap mendengarkan dengan respon empatik.</p>
+                    <h3 class="text-xl font-medium mb-3 main-text">Chatbot Pendukung</h3>
+                    <p class="secondary-text">Butuh teman bicara di tengah malam? Chatbot kami siap mendengarkan dengan respon empatik.</p>
                 </div>
-                
                 <!-- Feature 5 -->
-                <div class="bg-[#F2F2F2] p-6 rounded-xl hover:shadow-md transition">
-                    <div class="bg-[#AEE3F3] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <div class="feature-card p-6 rounded-xl">
+                    <div class="feature-icon w-14 h-14 rounded-lg flex items-center justify-center mb-4">
                         <span class="text-2xl">📚</span>
                     </div>
-                    <h3 class="text-xl font-medium mb-3">Edukasi Mental Health</h3>
-                    <p class="text-gray-600">Artikel dan sumber terpercaya tentang kesehatan mental yang disajikan dengan bahasa Gen Z.</p>
+                    <h3 class="text-xl font-medium mb-3 main-text">Edukasi Mental Health</h3>
+                    <p class="secondary-text">Artikel dan sumber terpercaya tentang kesehatan mental yang disajikan dengan bahasa Gen Z.</p>
                 </div>
-                
                 <!-- Feature 6 -->
-                <div class="bg-[#F2F2F2] p-6 rounded-xl hover:shadow-md transition">
-                    <div class="bg-[#CDEAC0] w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <div class="feature-card p-6 rounded-xl">
+                    <div class="feature-icon w-14 h-14 rounded-lg flex items-center justify-center mb-4" style="background:#758b96;color:#ffffff;">
                         <span class="text-2xl">💭</span>
                     </div>
-                    <h3 class="text-xl font-medium mb-3">Afirmasi Harian</h3>
-                    <p class="text-gray-600">Dapatkan kutipan penyemangat setiap hari untuk memulai harimu dengan pikiran positif.</p>
+                    <h3 class="text-xl font-medium mb-3 main-text">Afirmasi Harian</h3>
+                    <p class="secondary-text">Dapatkan kutipan penyemangat setiap hari untuk memulai harimu dengan pikiran positif.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="py-16 px-6 bg-[#F2F2F2]">
+    <section id="testimonials" class="py-16 px-6 footer-bg">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-semibold text-center mb-12 text-[#4A90E2]">Apa Kata Pengguna Kami?</h2>
-            
+            <h2 class="text-3xl font-semibold text-center mb-12 accent-text">Apa Kata Pengguna Kami?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Testimonial 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-[#B8CFCE]">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#AEE3F3] w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                            <span class="text-lg">A</span>
+                        <div class="primary-bg w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-lg main-text">A</span>
                         </div>
                         <div>
-                            <h4 class="font-medium">Andini, 19</h4>
-                            <p class="text-sm text-gray-500">Mahasiswa</p>
+                            <h4 class="font-medium main-text">Andini, 19</h4>
+                            <p class="text-sm secondary-text">Mahasiswa</p>
                         </div>
                     </div>
-                    <p class="text-gray-600">"SincMe.id membantuku memahami emosiku lebih baik. Mood trackernya sangat membantu untuk melihat polanya."</p>
+                    <p class="secondary-text">"SincMe.id membantuku memahami emosiku lebih baik. Mood trackernya sangat membantu untuk melihat polanya."</p>
                     <div class="flex mt-4">
                         <span class="text-yellow-400">★</span>
                         <span class="text-yellow-400">★</span>
@@ -132,19 +184,18 @@
                         <span class="text-yellow-400">★</span>
                     </div>
                 </div>
-                
                 <!-- Testimonial 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-[#B8CFCE]">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#CDEAC0] w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                            <span class="text-lg">R</span>
+                        <div class="secondary-bg w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-lg text-white">R</span>
                         </div>
                         <div>
-                            <h4 class="font-medium">Rafi, 22</h4>
-                            <p class="text-sm text-gray-500">Pekerja Lepas</p>
+                            <h4 class="font-medium main-text">Rafi, 22</h4>
+                            <p class="text-sm secondary-text">Pekerja Lepas</p>
                         </div>
                     </div>
-                    <p class="text-gray-600">"Story Wall membuatku sadar aku tidak sendirian. Komunitas di sini sangat suportif dan tidak judgmental."</p>
+                    <p class="secondary-text">"Story Wall membuatku sadar aku tidak sendirian. Komunitas di sini sangat suportif dan tidak judgmental."</p>
                     <div class="flex mt-4">
                         <span class="text-yellow-400">★</span>
                         <span class="text-yellow-400">★</span>
@@ -153,19 +204,18 @@
                         <span class="text-yellow-400">★</span>
                     </div>
                 </div>
-                
                 <!-- Testimonial 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-sm">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-[#B8CFCE]">
                     <div class="flex items-center mb-4">
-                        <div class="bg-[#AEE3F3] w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                            <span class="text-lg">D</span>
+                        <div class="primary-bg w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-lg main-text">D</span>
                         </div>
                         <div>
-                            <h4 class="font-medium">Dina, 20</h4>
-                            <p class="text-sm text-gray-500">Siswa</p>
+                            <h4 class="font-medium main-text">Dina, 20</h4>
+                            <p class="text-sm secondary-text">Siswa</p>
                         </div>
                     </div>
-                    <p class="text-gray-600">"Chatbotnya sangat membantu saat aku butuh curhat di jam-jam larut. Responnya empatik dan tidak terasa seperti robot."</p>
+                    <p class="secondary-text">"Chatbotnya sangat membantu saat aku butuh curhat di jam-jam larut. Responnya empatik dan tidak terasa seperti robot."</p>
                     <div class="flex mt-4">
                         <span class="text-yellow-400">★</span>
                         <span class="text-yellow-400">★</span>
@@ -179,89 +229,74 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 px-6 bg-gradient-to-r from-[#AEE3F3] to-[#CDEAC0]">
+    <section class="py-16 px-6 cta-gradient">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-semibold mb-6 text-[#4A90E2]">Mulai Perjalanan Self-Growth-mu Hari Ini</h2>
-            <p class="text-lg mb-8 text-gray-700">Bergabunglah dengan komunitas yang memahami dan mendukung tanpa menghakimi.</p>
-            <a href="auth.html?action=register" class="bg-white hover:bg-gray-100 text-[#4A90E2] px-8 py-3 rounded-lg font-medium inline-block transition shadow-md">Buat Akun Gratis</a>
+            <h2 class="text-3xl font-semibold mb-6 accent-text">Mulai Perjalanan Self-Growth-mu Hari Ini</h2>
+            <p class="text-lg mb-8 main-text">Bergabunglah dengan komunitas yang memahami dan mendukung tanpa menghakimi.</p>
+            <a href="auth.html?action=register" class="bg-white hover:bg-gray-100 accent-text px-8 py-3 rounded-lg font-medium inline-block transition shadow-md">Buat Akun Gratis</a>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-16 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-semibold text-center mb-12 text-[#4A90E2]">Tentang SincMe.id</h2>
-            
+            <h2 class="text-3xl font-semibold text-center mb-12 accent-text">Tentang SincMe.id</h2>
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
-                    <img src="assets/images/about-illustration.png" alt="About SincMe.id" class="w-full rounded-lg">
+                    <img src="assets/support.png" alt="About SincMe.id" class="w-full rounded-lg">
                 </div>
                 <div class="md:w-1/2">
-                    <p class="text-gray-600 mb-4">SincMe.id lahir dari keresahan akan kurangnya platform kesehatan mental yang ramah Gen Z di Indonesia. Kami percaya bahwa merawat kesehatan mental harus mudah diakses, tidak judgmental, dan sesuai dengan bahasa anak muda.</p>
-                    <p class="text-gray-600 mb-4">Dibangun oleh tim yang terdiri dari psikolog muda, developer, dan desainer, SincMe.id menggabungkan pendekatan berbasis bukti dengan desain yang menyenangkan.</p>
-                    <p class="text-gray-600">Kami tidak menggantikan terapi profesional, tetapi ingin menjadi teman pertama yang mendukung saat kamu membutuhkan.</p>
+                    <p class="secondary-text mb-4">SincMe.id lahir dari keresahan akan kurangnya platform kesehatan mental yang ramah Gen Z di Indonesia. Kami percaya bahwa merawat kesehatan mental harus mudah diakses, tidak judgmental, dan sesuai dengan bahasa anak muda.</p>
+                    <p class="secondary-text mb-4">Dibangun oleh tim yang terdiri dari psikolog muda, developer, dan desainer, SincMe.id menggabungkan pendekatan berbasis bukti dengan desain yang menyenangkan.</p>
+                    <p class="secondary-text">Kami tidak menggantikan terapi profesional, tetapi ingin menjadi teman pertama yang mendukung saat kamu membutuhkan.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#F2F2F2] py-12 px-6">
+    <footer class="footer-bg py-12 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center mb-4">
-                        <img src="assets/images/logo.png" alt="SincMe.id Logo" class="h-8 mr-2">
-                        <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id</span>
+                       <span class="text-xl font-bold sincerely-font whitespace-nowrap w-full block" style="overflow:visible;">SincMe.id</span>
                     </div>
-                    <p class="text-gray-600 text-sm">Tempat aman untuk eksplorasi kesehatan mental dan self-growth Gen Z.</p>
+                    <p class="secondary-text text-sm">Tempat aman untuk eksplorasi kesehatan mental dan self-growth.</p>
                 </div>
-                
                 <div>
-                    <h4 class="font-medium mb-4 text-[#4A90E2]">Navigasi</h4>
+                    <h4 class="font-medium mb-4 accent-text">Navigasi</h4>
                     <ul class="space-y-2">
-                        <li><a href="#features" class="text-gray-600 hover:text-[#4A90E2] text-sm transition">Fitur</a></li>
-                        <li><a href="#testimonials" class="text-gray-600 hover:text-[#4A90E2] text-sm transition">Testimoni</a></li>
-                        <li><a href="#about" class="text-gray-600 hover:text-[#4A90E2] text-sm transition">Tentang Kami</a></li>
-                        <li><a href="auth.html" class="text-gray-600 hover:text-[#4A90E2] text-sm transition">Masuk/Daftar</a></li>
+                        <li><a href="#features" class="secondary-text hover:footer-link text-sm transition">Fitur</a></li>
+                        <li><a href="#testimonials" class="secondary-text hover:footer-link text-sm transition">Testimoni</a></li>
+                        <li><a href="#about" class="secondary-text hover:footer-link text-sm transition">Tentang Kami</a></li>
+                        <li><a href="auth.html" class="secondary-text hover:footer-link text-sm transition">Masuk/Daftar</a></li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h4 class="font-medium mb-4 text-[#4A90E2]">Sumber Bantuan</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-600 hover:text-[#4A90E2] text-sm transition">Krisis Darurat</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[#4A90E2] text-sm transition">Daftar Psikolog</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[#4A90E2] text-sm transition">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-medium mb-4 text-[#4A90E2]">Ikuti Kami</h4>
+                    <h4 class="font-medium mb-4 accent-text">Ikuti Kami</h4>
                     <div class="flex space-x-4">
-                        <a href="#" class="bg-[#AEE3F3] hover:bg-[#8FD8EC] w-8 h-8 rounded-full flex items-center justify-center transition">
+                        <a href="#" class="primary-bg hover:accent-bg w-8 h-8 rounded-full flex items-center justify-center transition">
                             <span class="text-sm">📱</span>
                         </a>
-                        <a href="#" class="bg-[#CDEAC0] hover:bg-[#B5D9A8] w-8 h-8 rounded-full flex items-center justify-center transition">
-                            <span class="text-sm">📸</span>
+                        <a href="#" class="secondary-bg hover:accent-bg w-8 h-8 rounded-full flex items-center justify-center transition">
+                            <span class="text-sm text-white">📸</span>
                         </a>
-                        <a href="#" class="bg-[#AEE3F3] hover:bg-[#8FD8EC] w-8 h-8 rounded-full flex items-center justify-center transition">
+                        <a href="#" class="primary-bg hover:accent-bg w-8 h-8 rounded-full flex items-center justify-center transition">
                             <span class="text-sm">🐦</span>
                         </a>
                     </div>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-300 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 SincMe.id. All rights reserved.</p>
+            <div class="border-t border-[#B8CFCE] mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="secondary-text text-sm mb-4 md:mb-0">© 2025 SincMe.id. All rights reserved.</p>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-[#4A90E2] text-sm transition">Privacy Policy</a>
-                    <a href="#" class="text-gray-500 hover:text-[#4A90E2] text-sm transition">Terms of Service</a>
+                    <a href="#" class="secondary-text hover:footer-link text-sm transition">Privacy Policy</a>
+                    <a href="#" class="secondary-text hover:footer-link text-sm transition">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
-
     <script src="assets/js/main.js"></script>
 </body>
 </html>

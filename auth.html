@@ -3,219 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | SafeSpace</title>
+    <title>Login | SincMe</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <style>
-        .auth-container {
-            background: linear-gradient(135deg, #AEE3F3 0%, #CDEAC0 100%);
+        body {
+            background: #ffffff;
+            min-height: 100vh;
         }
-        .auth-card {
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        .glass-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(51,52,70,0.18);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid #B8CFCE;
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+        .glass-card:hover {
+            box-shadow: 0 16px 40px -10px #B8CFCE;
+            border-color: #9ca6bb;
+        }
+        .input-field {
+            color: #333446;
+            background: rgba(255,255,255,0.95);
+            border: 1.5px solid #B8CFCE;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
         .input-field:focus {
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+            border-color: #9ca6bb;
+            box-shadow: 0 0 0 2px #B8CFCE33;
         }
         .toggle-auth {
-            transition: all 0.3s ease;
+            transition: color 0.2s, text-decoration 0.2s;
         }
         .toggle-auth:hover {
+            color: #9ca6bb;
             text-decoration: underline;
             text-underline-offset: 4px;
         }
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(24px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #B8CFCE 0%, #9ca6bb 100%);
+            color: #333446;
+            border: none;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #9ca6bb 0%, #B8CFCE 100%);
+            box-shadow: 0 4px 16px -4px #B8CFCE;
+            transform: translateY(-2px) scale(1.02);
+        }
+        .btn-social {
+            border: 1.5px solid #B8CFCE;
+            background: rgba(255,255,255,0.95);
+            transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+        }
+        .btn-social:hover {
+            box-shadow: 0 2px 8px -2px #B8CFCE;
+            border-color: #9ca6bb;
+            background: #f7fafd;
+        }
+        .form-title {
+            background: linear-gradient(90deg, #B8CFCE 0%, #9ca6bb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .side-illustration {
+            background: linear-gradient(135deg, #B8CFCE 60%, #9ca6bb 100%);
+        }
+        .side-illustration img {
+            filter: drop-shadow(0 8px 24px #B8CFCE55);
+        }
+        .border-accent {
+            border-color: #9ca6bb !important;
+        }
+        .text-secondary { color: #758b96; }
+        .text-accent { color: #9ca6bb; }
+        .text-primary { color: #B8CFCE; }
+        .bg-accent { background-color: #9ca6bb; }
+        .bg-primary { background-color: #B8CFCE; }
+        .bg-secondary { background-color: #758b96; }
+        .sincerely-font {
+            font-family: 'Pacifico', cursive;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
-<body class="font-poppins bg-[#F2F2F2] text-gray-800 min-h-screen flex items-center justify-center p-4">
+<body class="font-poppins flex items-center justify-center p-4">
     <!-- Auth Container -->
-    <div class="auth-container rounded-2xl overflow-hidden w-full max-w-4xl flex flex-col md:flex-row">
+    <div class="glass-card w-full max-w-4xl flex flex-col md:flex-row overflow-hidden">
         <!-- Illustration Side (Desktop) -->
-        <div class="hidden md:flex flex-1 bg-white p-8 items-center justify-center">
-            <div class="text-center max-w-xs">
-                <img src="assets/images/auth-illustration.png" alt="Welcome to SafeSpace" class="w-full h-auto mb-6">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Selamat Datang Kembali</h2>
-                <p class="text-gray-600">Komunitas yang mendukung perjalanan kesehatan mentalmu</p>
+        <div class="hidden md:flex flex-1 side-illustration items-center justify-center relative">
+            <div class="text-center max-w-xs fade-in">
+                <!-- Tulisan "Sincerely, me" horizontal -->
+                <div class="mb-6">
+                    <span class="sincerely-font" style="font-size:2.2rem; color:#758b96;">
+                        Sincerely, <span style="font-size:2.5rem; color:#333446;">me</span>
+                    </span>
+                </div>
+                <h2 class="text-2xl font-bold mb-2 text-[#333446]">Selamat Datang Kembali</h2>
+                <p class="text-secondary">Komunitas yang mendukung perjalanan kesehatan mentalmu</p>
             </div>
+            <div class="absolute bottom-4 left-4 text-xs text-secondary opacity-70">© SincMe 2025</div>
         </div>
 
         <!-- Form Side -->
-        <div class="flex-1 bg-white p-8 md:p-10">
-        
+        <div class="flex-1 p-8 md:p-12 flex flex-col justify-center">
             <!-- Login Form (Default) -->
-            <div id="loginForm">
-                <h1 class="text-2xl font-semibold text-center mb-6">Masuk ke Akunmu</h1>
-                
+            <div id="loginForm" class="fade-in">
+                <h1 class="text-2xl font-bold text-center mb-6 form-title">Masuk ke Akunmu</h1>
                 <!-- Social Login -->
                 <div class="space-y-3 mb-6">
-                    <button class="w-full flex items-center justify-center space-x-2 bg-white border border-gray-200 rounded-lg py-3 px-4 hover:bg-gray-50 transition">
+                    <button class="w-full flex items-center justify-center space-x-2 btn-social rounded-lg py-3 px-4">
                         <img src="https://www.google.com/favicon.ico" alt="Google" class="w-5 h-5">
-                        <span>Lanjutkan dengan Google</span>
+                        <span class="font-medium text-[#333446]">Lanjutkan dengan Google</span>
                     </button>
-                    <button class="w-full flex items-center justify-center space-x-2 bg-white border border-gray-200 rounded-lg py-3 px-4 hover:bg-gray-50 transition">
-                        <i class="fab fa-apple text-gray-800"></i>
-                        <span>Lanjutkan dengan Apple</span>
+                    <button class="w-full flex items-center justify-center space-x-2 btn-social rounded-lg py-3 px-4">
+                        <i class="fab fa-apple text-[#333446]"></i>
+                        <span class="font-medium text-[#333446]">Lanjutkan dengan Apple</span>
                     </button>
                 </div>
-                
                 <div class="flex items-center my-6">
-                    <div class="flex-1 border-t border-gray-200"></div>
-                    <span class="mx-4 text-gray-500 text-sm">atau</span>
-                    <div class="flex-1 border-t border-gray-200"></div>
+                    <div class="flex-1 border-t border-accent"></div>
+                    <span class="mx-4 text-secondary text-sm">atau</span>
+                    <div class="flex-1 border-t border-accent"></div>
                 </div>
-                
                 <!-- Email Login -->
                 <form id="loginEmailForm" class="space-y-4">
                     <div>
-                        <label for="loginEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" id="loginEmail" class="w-full input-field border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-[#4A90E2]" placeholder="email@contoh.com" required>
+                        <label for="loginEmail" class="block text-sm font-medium text-[#333446] mb-1">Email</label>
+                        <input type="email" id="loginEmail" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="email@contoh.com" required>
                     </div>
                     <div>
                         <div class="flex justify-between items-center mb-1">
-                            <label for="loginPassword" class="block text-sm font-medium text-gray-700">Password</label>
-                            <a href="#" class="text-sm text-[#4A90E2] hover:underline">Lupa password?</a>
+                            <label for="loginPassword" class="block text-sm font-medium text-[#333446]">Password</label>
+                            <a href="#" class="text-sm text-primary hover:text-accent hover:underline">Lupa password?</a>
                         </div>
                         <div class="relative">
-                            <input type="password" id="loginPassword" class="w-full input-field border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-[#4A90E2]" placeholder="••••••••" required>
-                            <button type="button" class="absolute right-3 top-3 text-gray-400 hover:text-gray-600" id="toggleLoginPassword">
+                            <input type="password" id="loginPassword" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="••••••••" required>
+                            <button type="button" class="absolute right-3 top-3 text-secondary hover:text-accent" id="toggleLoginPassword" tabindex="-1">
                                 <i class="far fa-eye"></i>
                             </button>
                         </div>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
-                            <input type="checkbox" id="rememberMe" class="h-4 w-4 text-[#4A90E2] focus:ring-[#4A90E2] border-gray-300 rounded">
-                            <label for="rememberMe" class="ml-2 block text-sm text-gray-700">Ingat saya</label>
+                            <input type="checkbox" id="rememberMe" class="h-4 w-4 text-primary focus:ring-primary border-primary rounded">
+                            <label for="rememberMe" class="ml-2 block text-sm text-[#333446]">Ingat saya</label>
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-[#4A90E2] border-2 text-black py-3 px-4 rounded-lg font-medium hover:bg-[#3a7bc8] transition">
-                        Masuk
-                    </button>
+                    <button type="submit" class="w-full btn-primary py-3 px-4 rounded-lg shadow">Masuk</button>
                 </form>
-                
                 <div class="mt-6 text-center text-sm">
-                    <span class="text-gray-600">Belum punya akun? </span>
-                    <button id="showRegister" class="text-[#4A90E2] font-medium toggle-auth">Daftar sekarang</button>
+                    <span class="text-secondary">Belum punya akun? </span>
+                    <button id="showRegister" class="text-primary font-medium toggle-auth">Daftar sekarang</button>
                 </div>
             </div>
 
             <!-- Register Form (Hidden by default) -->
-            <div id="registerForm" class="hidden">
-                <h1 class="text-2xl font-semibold text-center mb-6">Buat Akun Baru</h1>
-                
+            <div id="registerForm" class="hidden fade-in">
+                <h1 class="text-2xl font-bold text-center mb-6 form-title">Buat Akun Baru</h1>
                 <!-- Social Register -->
                 <div class="space-y-3 mb-6">
-                    <button class="w-full flex items-center justify-center space-x-2 bg-white border border-gray-200 rounded-lg py-3 px-4 hover:bg-gray-50 transition">
+                    <button class="w-full flex items-center justify-center space-x-2 btn-social rounded-lg py-3 px-4">
                         <img src="https://www.google.com/favicon.ico" alt="Google" class="w-5 h-5">
-                        <span>Lanjutkan dengan Google</span>
+                        <span class="font-medium text-[#333446]">Lanjutkan dengan Google</span>
                     </button>
-                    <button class="w-full flex items-center justify-center space-x-2 bg-white border border-gray-200 rounded-lg py-3 px-4 hover:bg-gray-50 transition">
-                        <i class="fab fa-apple text-gray-800"></i>
-                        <span>Lanjutkan dengan Apple</span>
+                    <button class="w-full flex items-center justify-center space-x-2 btn-social rounded-lg py-3 px-4">
+                        <i class="fab fa-apple text-[#333446]"></i>
+                        <span class="font-medium text-[#333446]">Lanjutkan dengan Apple</span>
                     </button>
                 </div>
-                
                 <div class="flex items-center my-6">
-                    <div class="flex-1 border-t border-gray-200"></div>
-                    <span class="mx-4 text-gray-500 text-sm">atau</span>
-                    <div class="flex-1 border-t border-gray-200"></div>
+                    <div class="flex-1 border-t border-accent"></div>
+                    <span class="mx-4 text-secondary text-sm">atau</span>
+                    <div class="flex-1 border-t border-accent"></div>
                 </div>
-                
                 <!-- Email Register -->
                 <form id="registerEmailForm" class="space-y-4">
                     <div>
-                        <label for="registerName" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                        <input type="text" id="registerName" class="w-full input-field border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-[#4A90E2]" placeholder="Nama kamu" required>
+                        <label for="registerName" class="block text-sm font-medium text-[#333446] mb-1">Nama Lengkap</label>
+                        <input type="text" id="registerName" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="Nama kamu" required>
                     </div>
                     <div>
-                        <label for="registerEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" id="registerEmail" class="w-full input-field border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-[#4A90E2]" placeholder="email@contoh.com" required>
+                        <label for="registerEmail" class="block text-sm font-medium text-[#333446] mb-1">Email</label>
+                        <input type="email" id="registerEmail" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="email@contoh.com" required>
                     </div>
                     <div>
-                        <label for="registerPassword" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <label for="registerPassword" class="block text-sm font-medium text-[#333446] mb-1">Password</label>
                         <div class="relative">
-                            <input type="password" id="registerPassword" class="w-full input-field border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-[#4A90E2]" placeholder="••••••••" required>
-                            <button type="button" class="absolute right-3 top-3 text-gray-400 hover:text-gray-600" id="toggleRegisterPassword">
+                            <input type="password" id="registerPassword" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="••••••••" required>
+                            <button type="button" class="absolute right-3 top-3 text-secondary hover:text-accent" id="toggleRegisterPassword" tabindex="-1">
                                 <i class="far fa-eye"></i>
                             </button>
                         </div>
-                        <p class="mt-1 text-xs text-gray-500">Minimal 8 karakter dengan kombinasi huruf dan angka</p>
+                        <p class="mt-1 text-xs text-secondary">Minimal 8 karakter dengan kombinasi huruf dan angka</p>
                     </div>
                     <div>
-                        <label for="registerConfirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Password</label>
+                        <label for="registerConfirmPassword" class="block text-sm font-medium text-[#333446] mb-1">Konfirmasi Password</label>
                         <div class="relative">
-                            <input type="password" id="registerConfirmPassword" class="w-full input-field border border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:border-[#4A90E2]" placeholder="••••••••" required>
-                            <button type="button" class="absolute right-3 top-3 text-gray-400 hover:text-gray-600" id="toggleRegisterConfirmPassword">
+                            <input type="password" id="registerConfirmPassword" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="••••••••" required>
+                            <button type="button" class="absolute right-3 top-3 text-secondary hover:text-accent" id="toggleRegisterConfirmPassword" tabindex="-1">
                                 <i class="far fa-eye"></i>
                             </button>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <div class="flex items-center h-5">
-                            <input type="checkbox" id="agreeTerms" class="h-4 w-4 text-[#4A90E2] focus:ring-[#4A90E2] border-gray-300 rounded" required>
+                            <input type="checkbox" id="agreeTerms" class="h-4 w-4 text-primary focus:ring-primary border-primary rounded" required>
                         </div>
                         <div class="ml-3 text-sm">
-                            <label for="agreeTerms" class="text-gray-700">Saya setuju dengan <a href="#" class="text-[#4A90E2] hover:underline">Syarat & Ketentuan</a> dan <a href="#" class="text-[#4A90E2] hover:underline">Kebijakan Privasi</a> SafeSpace</label>
+                            <label for="agreeTerms" class="text-[#333446]">Saya setuju dengan <a href="#" class="text-primary hover:text-accent hover:underline">Syarat & Ketentuan</a> dan <a href="#" class="text-primary hover:text-accent hover:underline">Kebijakan Privasi</a> SafeSpace</label>
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-[#4A90E2] border-2 text-black py-3 px-4 rounded-lg font-medium hover:bg-[#3a7bc8] transition">
-                        Daftar
-                    </button>
+                    <button type="submit" class="w-full btn-primary py-3 px-4 rounded-lg shadow">Daftar</button>
                 </form>
-                
                 <div class="mt-6 text-center text-sm">
-                    <span class="text-gray-600">Sudah punya akun? </span>
-                    <button id="showLogin" class="text-[#4A90E2] font-medium toggle-auth">Masuk disini</button>
+                    <span class="text-secondary">Sudah punya akun? </span>
+                    <button id="showLogin" class="text-primary font-medium toggle-auth">Masuk disini</button>
                 </div>
             </div>
         </div>
     </div>
 
-    
-
     <script src="assets/js/auth.js"></script>
     <script>
-        // Toggle between login and register forms
+        // Toggle between login and register forms with animation
+        function showForm(formToShow) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            if (formToShow === 'register') {
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+                registerForm.classList.add('fade-in');
+                setTimeout(() => registerForm.classList.remove('fade-in'), 600);
+            } else {
+                registerForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('fade-in');
+                setTimeout(() => loginForm.classList.remove('fade-in'), 600);
+            }
+        }
         document.getElementById('showRegister').addEventListener('click', function() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('registerForm').classList.remove('hidden');
+            showForm('register');
         });
-        
         document.getElementById('showLogin').addEventListener('click', function() {
-            document.getElementById('registerForm').classList.add('hidden');
-            document.getElementById('loginForm').classList.remove('hidden');
+            showForm('login');
         });
-        
+
         // Toggle password visibility
         function setupPasswordToggle(buttonId, inputId) {
             const button = document.getElementById(buttonId);
             const input = document.getElementById(inputId);
-            
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
                 const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
                 input.setAttribute('type', type);
                 button.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
             });
         }
-        
         setupPasswordToggle('toggleLoginPassword', 'loginPassword');
         setupPasswordToggle('toggleRegisterPassword', 'registerPassword');
         setupPasswordToggle('toggleRegisterConfirmPassword', 'registerConfirmPassword');
-        
-        // Form submissions
+
+        // Simple validation for register
+        document.getElementById('registerEmailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pass = document.getElementById('registerPassword').value;
+            const confirm = document.getElementById('registerConfirmPassword').value;
+            if (pass.length < 8) {
+                alert('Password minimal 8 karakter.');
+                return;
+            }
+            if (pass !== confirm) {
+                alert('Konfirmasi password tidak cocok.');
+                return;
+            }
+            alert('Registration functionality would be implemented here');
+            // window.location.href = 'dashboard.html';
+        });
+
+        // Login validation (dummy)
         document.getElementById('loginEmailForm').addEventListener('submit', function(e) {
             e.preventDefault();
             // In a real app, you would handle login here
             alert('Login functionality would be implemented here');
-            // window.location.href = 'dashboard.html';
-        });
-        
-        document.getElementById('registerEmailForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // In a real app, you would handle registration here
-            alert('Registration functionality would be implemented here');
-            // After registration, you might automatically log them in
             // window.location.href = 'dashboard.html';
         });
     </script>

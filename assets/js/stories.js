@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const storiesContainer = document.getElementById("storiesContainer");
     const emojiToggle = document.getElementById("emojiToggle");
     const emojiPicker = document.getElementById("emojiPicker");
-
+    const showSavedBtn = document.getElementById("showSavedBtn");
+    const savedStoriesModal = document.getElementById("savedStoriesModal");
+    const savedStoriesContent = document.getElementById("savedStoriesContent");
+    const closeSavedModal = document.getElementById("closeSavedModal");
 
     if (!localStorage.getItem("currentUserId")) {
         localStorage.setItem("currentUserId", `user_${Date.now()}`);
@@ -14,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let stories = JSON.parse(localStorage.getItem("stories") || "[]");
     let likedStories = JSON.parse(localStorage.getItem("likedStories") || "[]");
     let savedStories = JSON.parse(localStorage.getItem("savedStories") || "[]");
-    let storyReactions = JSON.parse(localStorage.getItem("storyReactions") || "{}"); // {storyId: {userId: emoji}}
-
+    let storyReactions = JSON.parse(localStorage.getItem("storyReactions") || "{}");
     let isPrivate = false;
 
     renderStories();
@@ -23,8 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
     storyInput.addEventListener("input", () => {
         postStory.disabled = storyInput.value.trim() === "";
     });
-
-
 
     postStory.addEventListener("click", () => {
         const now = new Date();
@@ -57,6 +57,50 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    if (showSavedBtn && savedStoriesModal && savedStoriesContent && closeSavedModal) {
+        showSavedBtn.addEventListener("click", () => {
+            const stories = JSON.parse(localStorage.getItem("stories") || "[]");
+            const savedStories = JSON.parse(localStorage.getItem("savedStories") || "[]");
+
+            savedStoriesContent.innerHTML = "";
+
+            const saved = stories.filter(s => savedStories.includes(s.id));
+            if (saved.length === 0) {
+                savedStoriesContent.innerHTML = `<p class="text-sm text-gray-500 text-center">Belum ada postingan yang disimpan.</p>`;
+            } else {
+                saved.forEach(story => {
+                    const div = document.createElement("div");
+                    div.className = "p-3 rounded text-sm bg-white shadow mb-3 story-card";
+                    div.innerHTML = `
+                        <div class="font-semibold text-[#9ca6bb] mb-1">${story.name}</div>
+                        <p class="text-gray-700 mt-2 break-words whitespace-pre-wrap">${story.content}</p>
+                        <button class="text-[#ff6961] text-xs unsave-btn" data-id="${story.id}">Hapus dari Simpanan</button>
+                    `;
+                    savedStoriesContent.appendChild(div);
+                });
+
+                document.querySelectorAll(".unsave-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const id = parseInt(btn.getAttribute("data-id"));
+                        let saved = JSON.parse(localStorage.getItem("savedStories") || "[]");
+                        saved = saved.filter(sid => sid !== id);
+                        localStorage.setItem("savedStories", JSON.stringify(saved));
+                        btn.parentElement.remove();
+                        if (saved.length === 0) {
+                            savedStoriesContent.innerHTML = `<p class="text-sm text-gray-500 text-center">Belum ada postingan yang disimpan.</p>`;
+                        }
+                    });
+                });
+            }
+
+            savedStoriesModal.classList.remove("hidden");
+        });
+
+        closeSavedModal.addEventListener("click", () => {
+            savedStoriesModal.classList.add("hidden");
+        });
+    }
+
     function renderStories() {
         storiesContainer.innerHTML = "";
 
@@ -75,8 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const nameDiv = `
                 <div>
-                    <div class="font-semibold text-[#4A90E2]">${story.name}</div>
-                    <div class="text-xs text-gray-400">${formattedTime}${story.private ? " • Pribadi 🔒" : ""}</div>
+                    <div class="font-bold text-[#9ca6bb]">${story.name}</div>
+                    <div class="text-xs text-gray-400">${formattedTime}</div>
                 </div>
             `;
             const contentDiv = `<p class="text-gray-700 mt-2 break-words whitespace-pre-wrap">${story.content}</p>`;
@@ -168,24 +212,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 actionWrapper.appendChild(deleteButton);
             }
 
-            // REACTION EMOJIS
             const reactionWrapper = document.createElement("div");
             reactionWrapper.className = "mt-3 flex space-x-3";
-
             const emojis = ["👍", "❤️", "😂", "😢", "😡"];
             const reactions = storyReactions[story.id] || {};
             const countMap = emojis.reduce((acc, emoji) => {
                 acc[emoji] = Object.values(reactions).filter(r => r === emoji).length;
                 return acc;
             }, {});
-
             emojis.forEach(emoji => {
                 const btn = document.createElement("button");
                 btn.className = "text-xl";
                 const isReacted = reactions[currentUserId] === emoji;
                 btn.innerHTML = `${emoji} <span class="text-sm">${countMap[emoji]}</span>`;
                 btn.style.opacity = isReacted ? "1" : "0.6";
-
                 btn.addEventListener("click", () => {
                     if (!storyReactions[story.id]) storyReactions[story.id] = {};
                     if (storyReactions[story.id][currentUserId] === emoji) {
@@ -196,16 +236,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     localStorage.setItem("storyReactions", JSON.stringify(storyReactions));
                     renderStories();
                 });
-
                 reactionWrapper.appendChild(btn);
             });
 
             card.innerHTML = "";
             card.appendChild(topWrapper);
             card.insertAdjacentHTML("beforeend", contentDiv);
-            card.appendChild(reactionWrapper); // insert reactions
+            card.appendChild(reactionWrapper);
             card.appendChild(actionWrapper);
-
             storiesContainer.appendChild(card);
         });
     }
@@ -241,90 +279,35 @@ document.addEventListener("DOMContentLoaded", function () {
         const profileLabel = document.getElementById("profileSidebarLabel");
         if (profileLabel) {
             if (name && name.trim() !== "") {
-                profileLabel.textContent = name;
+                profileLabel.textContent = name.length > 15 ? name.substring(0, 15) + '...' : name;
             } else {
                 profileLabel.textContent = "Profile";
             }
         }
     }
 
+    function updateStoryFormAvatar() {
+        const avatar = localStorage.getItem("avatar") || "";
+        const name = localStorage.getItem("name") || "A";
+        const avatarDiv = document.querySelector('.w-10.h-10.rounded-full.bg-\\[\\#758b96\\].flex.items-center.justify-center');
+        if (avatarDiv) {
+            if (avatar) {
+                avatarDiv.innerHTML = `<img src="${avatar}" class="w-full h-full object-cover rounded-full" alt="Avatar">`;
+            } else {
+                avatarDiv.innerHTML = `<span class="text-sm font-medium">${(name.charAt(0) || "A").toUpperCase()}</span>`;
+            }
+        }
+    }
+
+    updateStoryFormAvatar();
     updateProfileLabel();
 
-    // Update label jika localStorage berubah (misal dari tab lain)
-    window.addEventListener("storage", function(e) {
+    window.addEventListener("storage", function (e) {
+        if (e.key === "avatar" || e.key === "name") {
+            updateStoryFormAvatar();
+        }
         if (e.key === "name") {
             updateProfileLabel();
         }
     });
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-    const name = localStorage.getItem("name");
-    const profileLabel = document.getElementById("profileSidebarLabel");
-
-    if (profileLabel) {
-      if (name && name.trim() !== "") {
-        if( name.length > 15) {
-        profileLabel.textContent = name.substring(0, 15) + '...';
-        } else {
-        profileLabel.textContent = name;
-        }
-        } else {
-            profileLabel.textContent = "Profile";
-        }
-        }
-    });
- 
-    document.addEventListener("DOMContentLoaded", () => {
-    const showSavedBtn = document.getElementById("showSavedBtn");
-    const savedStoriesModal = document.getElementById("savedStoriesModal");
-    const savedStoriesContent = document.getElementById("savedStoriesContent");
-    const closeSavedModal = document.getElementById("closeSavedModal");
-
-    if (showSavedBtn && savedStoriesModal && savedStoriesContent && closeSavedModal) {
-        showSavedBtn.addEventListener("click", () => {
-            const stories = JSON.parse(localStorage.getItem("stories") || "[]");
-            const savedStories = JSON.parse(localStorage.getItem("savedStories") || "[]");
-
-            savedStoriesContent.innerHTML = "";
-
-            const saved = stories.filter(s => savedStories.includes(s.id));
-            if (saved.length === 0) {
-                savedStoriesContent.innerHTML = `<p class="text-sm text-gray-500 text-center">Belum ada postingan yang disimpan.</p>`;
-            } else {
-                saved.forEach(story => {
-                    const div = document.createElement("div");
-                    div.className = "p-3 rounded text-sm bg-white shadow mb-3 story-card";
-                    div.innerHTML = `
-                        <div class="font-semibold text-[#4A90E2] mb-1">${story.name}</div>
-                        <p class="text-gray-700 mt-2 break-words whitespace-pre-wrap">${story.content}</p>
-                        <button class="text-red-500 text-xs unsave-btn" data-id="${story.id}">Hapus dari Simpanan</button>
-                    `;
-                    savedStoriesContent.appendChild(div);
-                });
-
-                // Tambahkan event listener untuk unsave
-                document.querySelectorAll(".unsave-btn").forEach(btn => {
-                    btn.addEventListener("click", () => {
-                        const id = parseInt(btn.getAttribute("data-id"));
-                        let saved = JSON.parse(localStorage.getItem("savedStories") || "[]");
-                        saved = saved.filter(sid => sid !== id);
-                        localStorage.setItem("savedStories", JSON.stringify(saved));
-                        btn.parentElement.remove();
-                        if (saved.length === 0) {
-                            savedStoriesContent.innerHTML = `<p class="text-sm text-gray-500 text-center">Belum ada postingan yang disimpan.</p>`;
-                        }
-                    });
-                });
-            }
-
-            savedStoriesModal.classList.remove("hidden");
-        });
-
-        closeSavedModal.addEventListener("click", () => {
-            savedStoriesModal.classList.add("hidden");
-        });
-    }
-});
-
-   

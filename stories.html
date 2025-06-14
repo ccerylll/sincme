@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community | Calmia</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
@@ -26,6 +26,14 @@
         }
         .show-emoji-picker {
             display: block;
+        }
+        .sincerely-font {
+            font-family: 'Pacifico', cursive;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #758b96 0%, #B8CFCE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
@@ -57,38 +65,37 @@
 
     <!-- Desktop Sidebar -->
     <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
-        <div class="flex items-center mb-10">
-            <!-- <img src="assets/images/logo.png" alt="Calmia Logo" class="h-8 mr-2"> -->
-            <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id</span>
+        <div class="flex items-center mb-10 overflow-x-visible">
+            <span class="text-3xl font-bold sincerely-font whitespace-nowrap w-full block" style="overflow:visible;">SincMe.id</span>
         </div>
-        
+
         <div class="flex-1">
             <nav class="space-y-4">
-                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-home mr-3"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-book mr-3"></i>
                     <span>Journal</span>
                 </a>
-                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-smile mr-3"></i>
                     <span>Mood Tracker</span>
                 </a>
-                <a href="stories.html" class="flex items-center p-3 rounded-lg bg-[#F2F2F2] text-[#4A90E2]">
+                <a href="stories.html" class="flex items-center p-3 rounded-lg bg-[#E6F2F2] text-[#333446]">
                     <i class="fas fa-users mr-3"></i>
                     <span>Community</span>
                 </a>
-                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-quote-left mr-3"></i>
                     <span>Daily Quotes</span>
                 </a>
-                <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-book-open mr-3"></i>
                     <span>Education</span>
                 </a>
-                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-robot mr-3"></i>
                     <span>Chatbot</span>
                 </a>
@@ -96,79 +103,76 @@
         </div>
         
             <div class="pt-4 border-t border-gray-200">
-            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                 <i class="fas fa-user mr-3"></i>
                 <span id="profileSidebarLabel">Profile</span>
             </a>
             </div>
             
-            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                 <i class="fas fa-sign-out-alt mr-3"></i>
                 <span>Logout</span>
             </a>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="md:ml-64 pb-16 md:pb-0">
-        <!-- Top Bar -->
-        <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-semibold text-gray-800">Community Stories</h1>
-                <!-- <p class="text-sm text-gray-600">Bagikan dan baca pengalaman dari komunitas</p> -->
+<!-- Main Content -->
+<div class="md:ml-64 pb-16 md:pb-0">
+    <!-- Top Bar -->
+    <header class="bg-[#ffffff] shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-semibold text-[#333446]">Community Stories</h1>
+            <!-- <p class="text-sm text-[#758b96]">Bagikan dan baca pengalaman dari komunitas</p> -->
+        </div>
+        <div class="flex items-center space-x-4">
+            <!-- Save/Bookmark Icon -->
+            <button id="showSavedBtn" class="p-2 rounded-full hover:bg-[#E6F2F2]">
+                <i class="fas fa-bookmark text-[#758b96]"></i>
+            </button>
+
+            <!-- Notification Icon -->
+            <button class="p-2 rounded-full hover:bg-[#E6F2F2]">
+                <i class="fas fa-bell text-[#758b96]"></i>
+            </button>
+        </div>
+    </header>
+
+    <div id="savedStoriesModal" class="fixed inset-0 bg-[#00000080] flex items-center justify-center z-50 hidden">
+        <div class="bg-[#ffffff] p-6 rounded-lg shadow-lg lg:w-[60vw] w-[80vw] max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-[#333446]">Postingan Disimpan</h2>
+                <button id="closeSavedModal" class="text-[#758b96] hover:text-[#333446]">&times;</button>
             </div>
-            <div class="flex items-center space-x-4">
-                <!-- Save/Bookmark Icon -->
-                <button id="showSavedBtn" class="p-2 rounded-full hover:bg-[#F2F2F2]">
-                <i class="fas fa-bookmark text-gray-600"></i>
-                </button>
-
-                <!-- Notification Icon -->
-                <button class="p-2 rounded-full hover:bg-[#F2F2F2]">
-                    <i class="fas fa-bell text-gray-600"></i>
-                </button>
+            <div id="savedStoriesContent" class="space-y-3">
+                <!-- Saved stories akan muncul di sini -->
             </div>
-
-        </header>
-
-<div id="savedStoriesModal" class="fixed inset-0 bg-[#00000080] flex items-center justify-center z-50 hidden">
-  <div class="bg-[#F2F2F2] p-6 rounded-lg shadow-lg lg:w-[60vw] w-[80vw] max-h-[80vh] overflow-y-auto">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-semibold">Postingan Disimpan</h2>
-      <button id="closeSavedModal" class="text-gray-500 hover:text-gray-700">&times;</button>
+        </div>
     </div>
-    <div id="savedStoriesContent" class="space-y-3">
-      <!-- Saved stories akan muncul di sini -->
-    </div>
-  </div>
-</div>
 
-
- 
         <!-- Community Content -->
         <main class="p-6">
             <!-- Create Story Card -->
-            <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+            <div class="bg-gradient-to-r from-[#B8CFCE] to-[#9ca6bb] rounded-xl p-6 mb-6 shadow-sm">
                 <div class="flex items-start space-x-3">
-                    <div class="w-10 h-10 rounded-full bg-[#AEE3F3] flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-full bg-[#758b96] flex items-center justify-center">
                         <span class="text-sm font-medium">A</span>
                     </div>
                     <div class="flex-1">
-                        <textarea id="storyInput" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#4A90E2] focus:border-transparent" placeholder="Bagikan ceritamu dengan komunitas..." rows="3"></textarea>
+                        <textarea id="storyInput" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#758b96] focus:border-transparent" placeholder="Bagikan ceritamu dengan komunitas..." rows="3"></textarea>
                         <div class="flex justify-between items-center mt-3">
                             <div class="flex space-x-2">
-                                <button id="emojiToggle" class="text-gray-500 hover:text-[#4A90E2] p-2 rounded-full hover:bg-[#F2F2F2]">
+                                <button id="emojiToggle" class="text-gray-500 hover:text-[#758b96] p-2 rounded-full hover:bg-[#F2F2F2]">
                                     <i class="far fa-smile"></i>
                                 </button>
 
 
                             </div>
-                            <button id="postStory" class="bg-[#4A90E2] text-white px-4 py-2 rounded-lg font-medium hover:bg-[#3a7bc8] disabled:opacity-50" disabled>
+                            <button id="postStory" class="bg-[#B8CFCE] text-white px-4 py-2 rounded-lg font-medium hover:bg-[#758b96] disabled:opacity-65" disabled>
                                 Posting
                             </button>
                         </div>
                         <!-- Emoji Picker (hidden by default) -->
-                        <div id="emojiPicker" class="emoji-picker bg-white shadow-lg rounded-lg p-3 w-64">
+                        <div id="emojiPicker" class="emoji-picker bg-[#B8CFCE] shadow-lg rounded-lg p-3 w-64">
                             <div class="grid grid-cols-6 gap-2">
                                 <span class="emoji-option text-xl cursor-pointer">😊</span>
                                 <span class="emoji-option text-xl cursor-pointer">😢</span>
@@ -187,8 +191,6 @@
                     </div>
                 </div>
             </div>
-
-
 
             <!-- Stories List -->
             <div class="space-y-4" id="storiesContainer">

@@ -6,13 +6,6 @@ const moodEmojis = {
   "Fokus": "🎯"
 };
 
-const moodLevels = {
-  "Tenang": 40,
-  "Bahagia": 100,
-  "Cemas": 25,
-  "Sedih": 10,
-  "Fokus": 75
-};
 
 // Fungsi untuk update label profil sidebar
 function updateProfileLabel() {
@@ -46,8 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("mood").value = mood;
 
   // Set ke tampilan
-  document.getElementById("displayName").textContent = name || "Andini";
-  document.getElementById("displayEmail").textContent = email || "andini@email.com";
+  document.getElementById("displayName").textContent = name || "User";
+  document.getElementById("displayEmail").textContent = email || "User@email.com";
   document.getElementById("moodStatus").textContent = `“Saat ini kamu merasa: ${moodEmojis[mood] || ''} ${mood}”`;
 
   updateProfileLabel(); // Sidebar label

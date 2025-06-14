@@ -5,162 +5,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot | SincMe.id</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <style>
-        .message-bubble {
-            max-width: 80%;
-            border-radius: 18px;
-            padding: 12px 16px;
-            margin-bottom: 12px;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        
-        .bot-message {
-            background-color: #f0f7ff;
-            border-bottom-left-radius: 4px;
-            align-self: flex-start;
-        }
-        
-        .user-message {
-            background-color: #4A90E2;
-            color: white;
-            border-bottom-right-radius: 4px;
-            align-self: flex-end;
-        }
-        
-        .typing-indicator span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #4A90E2;
-            margin: 0 2px;
-            animation: bounce 1.3s infinite;
-        }
-        
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .chat-container {
-            height: calc(100vh - 180px);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .suggested-question {
-            background-color: #f0f7ff;
-            border: 1px solid #c2dbf7;
-            border-radius: 20px;
-            padding: 8px 16px;
-            margin: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-        }
-        
-        .suggested-question:hover {
-            background-color: #dbe9fa;
-        }
-    </style>
+<style>
+    .message-bubble {
+        max-width: 80%;
+        border-radius: 18px;
+        padding: 12px 16px;
+        margin-bottom: 12px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .bot-message {
+        background-color: #E6F2F2; /* ganti dari #f0f7ff */
+        border-bottom-left-radius: 4px;
+        align-self: flex-start;
+        color: #333446;
+    }
+
+    .user-message {
+        background-color: #B8CFCE; /* ganti dari #4A90E2 */
+        color: #333446;
+        border-bottom-right-radius: 4px;
+        align-self: flex-end;
+    }
+
+    .typing-indicator span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #758b96; /* ganti dari #4A90E2 */
+        margin: 0 2px;
+        animation: bounce 1.3s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-container {
+        height: calc(100vh - 180px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .suggested-question {
+        background-color: #E6F2F2; /* ganti dari #f0f7ff */
+        border: 1px solid #B8CFCE; /* ganti dari #c2dbf7 */
+        border-radius: 20px;
+        padding: 8px 16px;
+        margin: 4px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+        color: #333446;
+    }
+
+    .suggested-question:hover {
+        background-color: #D3E5E4; /* ganti dari #dbe9fa */
+    }
+
+    .sincerely-font {
+        font-family: 'Pacifico', cursive;
+        letter-spacing: 1px;
+        background: linear-gradient(90deg, #758b96 0%, #B8CFCE 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+</style>
+
 </head>
 <body class="font-poppins bg-[#F2F2F2] text-gray-800">
 
     <!-- Mobile Bottom Navigation -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg flex justify-around items-center py-3 z-50">
-        <a href="dashboard.html" class="text-gray-500 flex flex-col items-center">
-            <i class="fas fa-home text-xl"></i>
-            <span class="text-xs mt-1">Home</span>
-        </a>
-        <a href="journal.html" class="text-gray-500 flex flex-col items-center">
-            <i class="fas fa-book text-xl"></i>
-            <span class="text-xs mt-1">Journal</span>
-        </a>
-        <a href="mood.html" class="text-gray-500 flex flex-col items-center">
-            <i class="fas fa-smile text-xl"></i>
-            <span class="text-xs mt-1">Mood</span>
-        </a>
-        <a href="stories.html" class="text-gray-500 flex flex-col items-center">
-            <i class="fas fa-users text-xl"></i>
-            <span class="text-xs mt-1">Community</span>
-        </a>
-        <a href="chatbot.html" class="text-[#4A90E2] flex flex-col items-center">
-            <i class="fas fa-robot text-xl"></i>
-            <span class="text-xs mt-1">Chatbot</span>
-        </a>
-    </div>
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-[#ffffff] shadow-lg flex justify-around items-center py-3 z-50">
+    <a href="dashboard.html" class="text-[#758b96] flex flex-col items-center">
+        <i class="fas fa-home text-xl"></i>
+        <span class="text-xs mt-1">Home</span>
+    </a>
+    <a href="journal.html" class="text-[#758b96] flex flex-col items-center">
+        <i class="fas fa-book text-xl"></i>
+        <span class="text-xs mt-1">Journal</span>
+    </a>
+    <a href="mood.html" class="text-[#758b96] flex flex-col items-center">
+        <i class="fas fa-smile text-xl"></i>
+        <span class="text-xs mt-1">Mood</span>
+    </a>
+    <a href="stories.html" class="text-[#758b96] flex flex-col items-center">
+        <i class="fas fa-users text-xl"></i>
+        <span class="text-xs mt-1">Community</span>
+    </a>
+    <a href="chatbot.html" class="text-[#333446] flex flex-col items-center">
+        <i class="fas fa-robot text-xl"></i>
+        <span class="text-xs mt-1">Chatbot</span>
+        
+    </a>
+        <a href="chatbot.html" class="text-[#333446] flex flex-col items-center">
+        <i class="fas fa-robot text-xl"></i>
+        <span class="text-xs mt-1"></span>
+    </a>
+</div>
+
 
     <!-- Desktop Sidebar -->
     <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
-        <div class="flex items-center mb-10">
-            <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id</span>
+        <div class="flex items-center mb-10 overflow-x-visible">
+            <span class="text-3xl font-bold sincerely-font whitespace-nowrap w-full block" style="overflow:visible;">SincMe.id</span>
         </div>
         
-        <div class="flex-1">
-            <nav class="space-y-4">
-                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-                    <i class="fas fa-home mr-3"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-                    <i class="fas fa-book mr-3"></i>
-                    <span>Journal</span>
-                </a>
-                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-                    <i class="fas fa-smile mr-3"></i>
-                    <span>Mood Tracker</span>
-                </a>
-                <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-                    <i class="fas fa-users mr-3"></i>
-                    <span>Community</span>
-                </a>
-                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-                    <i class="fas fa-quote-left mr-3"></i>
-                    <span>Daily Quotes</span>
-                </a>
-                <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-                    <i class="fas fa-book-open mr-3"></i>
-                    <span>Education</span>
-                </a>
-                <a href="chatbot.html" class="flex items-center p-3 rounded-lg bg-[#F2F2F2] text-[#4A90E2]">
-                    <i class="fas fa-robot mr-3"></i>
-                    <span>Chatbot</span>
-                </a>
-            </nav>
-        </div>
+<div class="flex-1">
+  <nav class="space-y-4">
+    <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+      <i class="fas fa-home mr-3"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+      <i class="fas fa-book mr-3"></i>
+      <span>Journal</span>
+    </a>
+    <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+      <i class="fas fa-smile mr-3"></i>
+      <span>Mood Tracker</span>
+    </a>
+    <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+      <i class="fas fa-users mr-3"></i>
+      <span>Community</span>
+    </a>
+    <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+      <i class="fas fa-quote-left mr-3"></i>
+      <span>Daily Quotes</span>
+    </a>
+    <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+      <i class="fas fa-book-open mr-3"></i>
+      <span>Education</span>
+    </a>
+    <a href="chatbot.html" class="flex items-center p-3 rounded-lg bg-[#E6F2F2] text-[#333446]">
+      <i class="fas fa-robot mr-3"></i>
+      <span>Chatbot</span>
+    </a>
+  </nav>
+</div>
+
         
          <div class="pt-4 border-t border-gray-200">
-            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                 <i class="fas fa-user mr-3"></i>
                 <span id="profileSidebarLabel">Profile</span>
             </a>
             </div>
-            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                 <i class="fas fa-sign-out-alt mr-3"></i>
                 <span>Logout</span>
             </a>
@@ -172,7 +191,7 @@
         <!-- Top Bar -->
         <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-semibold text-gray-800">SincMe.id Bot</h1>
+                <h1 class="text-2xl font-semibold text-[#333446]">SincMe.id Bot</h1>
                 <p class="text-sm text-gray-600">Asisten virtual untuk kesehatan mental Anda</p>
             </div>
             <div class="flex items-center space-x-4">
@@ -182,256 +201,76 @@
         </header>
 
         <!-- Chatbot Content -->
-        <main class="p-4 md:p-6">
-            <div class="bg-white rounded-xl shadow-sm h-[calc(100vh-140px)] flex flex-col">
-                <!-- Chat Header -->
-                <div class="border-b border-gray-200 p-4">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                            <i class="fas fa-robot text-blue-500"></i>
-                        </div>
-                        <div>
-                            <h2 class="font-semibold">SincMe.id Bot</h2>
-                            <p class="text-xs text-gray-500">Online - Siap membantu Anda</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chat Messages -->
-                <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 chat-messages">
-                    <!-- Initial bot message -->
-                    <div class="flex items-start space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-robot text-blue-500 text-sm"></i>
-                        </div>
-                        <div class="message-bubble bot-message">
-                            <p class="text-gray-800">Halo! Saya SincMe.id Bot, asisten kesehatan mental Anda. 😊</p>
-                            <p class="mt-2 text-gray-800">Saya di sini untuk mendengarkan, memberikan dukungan, dan membantu Anda menemukan sumber daya yang berguna.</p>
-                            <p class="mt-2 text-gray-800">Bagaimana perasaan Anda hari ini?</p>
-                            
-                            <!-- Suggested questions -->
-                            <div class="mt-4 flex flex-wrap">
-                                <div class="suggested-question" onclick="sendSuggestedMessage('Saya merasa cemas hari ini')">Saya merasa cemas</div>
-                                <div class="suggested-question" onclick="sendSuggestedMessage('Saya sedang sedih')">Saya sedang sedih</div>
-                                <div class="suggested-question" onclick="sendSuggestedMessage('Apa yang bisa saya lakukan untuk mengatasi stres?')">Tips atasi stres</div>
-                                <div class="suggested-question" onclick="sendSuggestedMessage('Saya butuh teknik relaksasi')">Teknik relaksasi</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chat Input -->
-                <div class="border-t border-gray-200 p-4">
-                    <div class="flex space-x-3">
-                        <input 
-                            type="text" 
-                            id="messageInput" 
-                            class="flex-1 border border-gray-200 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
-                            placeholder="Ketik pesan Anda..."
-                            onkeypress="if(event.key === 'Enter') sendMessage()"
-                        >
-                        <button 
-                            id="sendMessage" 
-                            class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-blue-600"
-                            onclick="sendMessage()"
-                        >
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- Notifikasi Pop-up -->
-            <div id="notifPopup" class="fixed top-16 right-6 bg-white border border-gray-200 rounded-lg shadow-lg w-64 p-4 hidden z-50">
-                <h3 class="font-semibold text-gray-800 mb-2">Notifikasi</h3>
-                <ul class="text-sm text-gray-600 space-y-1">
-                    <li>🌟 Cerita baru dari komunitas!</li>
-                    <li>🧠 Artikel edukasi baru telah ditambahkan.</li>
-                    <li>💬 Seseorang menyukai postinganmu.</li>
-                </ul>
-            </div>
-        </main>
+<main class="p-4 md:p-6">
+  <div class="bg-[#ffffff] rounded-xl shadow-sm h-[calc(100vh-140px)] flex flex-col">
+    <!-- Chat Header -->
+    <div class="border-b border-[#B8CFCE] p-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-[#E6F2F2] flex items-center justify-center">
+          <i class="fas fa-robot text-[#758b96]"></i>
+        </div>
+        <div>
+          <h2 class="font-semibold text-[#333446]">SincMe.id Bot</h2>
+          <p class="text-xs text-[#758b96]">Online - Siap membantu Anda</p>
+        </div>
+      </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set focus to input when page loads
-            document.getElementById('messageInput').focus();
-        });
-        
-        function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const message = input.value.trim();
-            
-            if (message) {
-                // Add user message to chat
-                addMessageToChat(message, 'user');
-                input.value = '';
-                
-                // Simulate bot thinking
-                showTypingIndicator();
-                
-                // Simulate bot response after delay
-                setTimeout(() => {
-                    removeTypingIndicator();
-                    generateBotResponse(message);
-                }, 1000 + Math.random() * 1000);
-            }
-        }
-        
-        function sendSuggestedMessage(message) {
-            document.getElementById('messageInput').value = message;
-            sendMessage();
-        }
-        
-        function addMessageToChat(message, sender) {
-            const chatMessages = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            
-            if (sender === 'user') {
-                messageDiv.className = 'flex items-start justify-end space-x-2';
-                messageDiv.innerHTML = `
-                    <div class="message-bubble user-message">
-                        <p>${message}</p>
-                    </div>
-                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                        <span class="text-sm font-medium">A</span>
-                    </div>
-                `;
-            } else if (sender === 'bot') {
-                messageDiv.className = 'flex items-start space-x-2';
-                messageDiv.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-robot text-blue-500 text-sm"></i>
-                    </div>
-                    <div class="message-bubble bot-message">
-                        <p class="text-gray-800">${message}</p>
-                    </div>
-                `;
-            }
-            
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        
-        function showTypingIndicator() {
-            const chatMessages = document.getElementById('chatMessages');
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'flex items-start space-x-2';
-            typingDiv.id = 'typingIndicator';
-            typingDiv.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-robot text-blue-500 text-sm"></i>
-                </div>
-                <div class="message-bubble bot-message typing-indicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            `;
-            
-            chatMessages.appendChild(typingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        
-        function removeTypingIndicator() {
-            const typingIndicator = document.getElementById('typingIndicator');
-            if (typingIndicator) {
-                typingIndicator.remove();
-            }
-        }
-        
-        function generateBotResponse(userMessage) {
-            const lowerCaseMessage = userMessage.toLowerCase();
-            let response = '';
-            
-            if (lowerCaseMessage.includes('halo') || lowerCaseMessage.includes('hai') || 
-                lowerCaseMessage.includes('hi')) {
-                response = "Halo juga! Senang bisa berbicara dengan Anda. Ada yang bisa saya bantu hari ini? 😊";
-            } 
-            else if (lowerCaseMessage.includes('terima kasih') || lowerCaseMessage.includes('makasih')) {
-                response = "Sama-sama! Saya selalu siap membantu Anda kapan pun. 😊";
-            }
-            else if (lowerCaseMessage.includes('cemas') || lowerCaseMessage.includes('gelisah') || 
-                     lowerCaseMessage.includes('khawatir')) {
-                response = "Saya mengerti perasaan cemas bisa sangat tidak nyaman. Coba tarik napas dalam-dalam selama 4 detik, tahan selama 4 detik, lalu hembuskan selama 6 detik. Ulangi beberapa kali. Ini dapat membantu menenangkan sistem saraf Anda. 💆‍♀️";
-            }
-            else if (lowerCaseMessage.includes('sedih') || lowerCaseMessage.includes('murung') || 
-                     lowerCaseMessage.includes('down') || lowerCaseMessage.includes('depresi')) {
-                response = "Saya turut prihatin mendengar Anda merasa sedih. Ingatlah bahwa perasaan ini bersifat sementara. Mungkin Anda bisa mencoba menuliskan perasaan Anda di jurnal atau mendengarkan musik yang menenangkan. 🎵";
-            }
-            else if (lowerCaseMessage.includes('stres') || lowerCaseMessage.includes('tekanan')) {
-                response = "Stres adalah reaksi normal, tetapi penting untuk mengelolanya. Coba teknik 5-4-3-2-1: sebutkan 5 hal yang bisa Anda lihat, 4 yang bisa Anda sentuh, 3 yang bisa Anda dengar, 2 yang bisa Anda cium, dan 1 yang bisa Anda rasakan. Ini bisa membantu membawa Anda kembali ke saat ini. 🌿";
-            }
-            else if (lowerCaseMessage.includes('relaksasi') || lowerCaseMessage.includes('santai') || 
-                     lowerCaseMessage.includes('tenang')) {
-                response = "Coba teknik relaksasi otot progresif: tegangkan dan kendurkan setiap kelompok otot mulai dari kaki hingga kepala. Atau coba meditasi singkat 5 menit: fokus pada napas dan biarkan pikiran datang dan pergi tanpa menghakimi. 🧘‍♀️";
-            }
-            else if (lowerCaseMessage.includes('tidur') || lowerCaseMessage.includes('insomnia')) {
-                response = "Masalah tidur sering terkait dengan stres. Coba buat rutinitas tidur yang konsisten, hindari layar 1 jam sebelum tidur, dan ciptakan lingkungan yang tenang. Teh chamomile juga bisa membantu. 😴";
-            }
-            else if (lowerCaseMessage.includes('motivasi') || lowerCaseMessage.includes('semangat')) {
-                response = "Ingatlah bahwa setiap hari adalah kesempatan baru. Anda lebih kuat dari yang Anda kira. Jangan mengukur kemajuan Anda dengan standar orang lain. Setiap langkah kecil itu penting! 💪";
-            }
-            else {
-                // Default responses
-                const defaultResponses = [
-                    "Saya mengerti. Bisa Anda ceritakan lebih banyak tentang perasaan Anda?",
-                    "Terima kasih telah berbagi. Apa yang sedang Anda pikirkan saat ini?",
-                    "Saya di sini untuk mendengarkan. Apakah ada hal spesifik yang ingin Anda bicarakan?",
-                    "Setiap perasaan itu valid. Jika Anda nyaman berbagi, saya siap mendengarkan.",
-                    "Saya mungkin tidak memiliki semua jawaban, tapi saya bisa membantu Anda menemukan sumber daya yang berguna."
-                ];
-                response = defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
-            }
-            
-            addMessageToChat(response, 'bot');
-        }
-        const bellBtn = document.querySelector('button i.fa-bell')?.parentElement;
-        const popup = document.getElementById('notifPopup');
-    
-        if (bellBtn && popup) {
-            bellBtn.addEventListener('click', () => {
-                popup.classList.toggle('hidden');
-            });
-    
-            // Close on outside click
-            document.addEventListener('click', (e) => {
-                if (!popup.contains(e.target) && !bellBtn.contains(e.target)) {
-                    popup.classList.add('hidden');
-                }
-            });
-        }
-  function updateProfileLabel() {
-    const name = localStorage.getItem("name");
-    const profileLabel = document.getElementById("profileSidebarLabel");
-    if (profileLabel) {
-      if (name && name.trim() !== "") {
-        if( name.length > 15) {
-          profileLabel.textContent = name.substring(0, 15) + '...';
-        } else {
-        profileLabel.textContent = name;
-        }
-      } else {
-        profileLabel.textContent = "Profile";
-      }
-    }
-  }
+    <!-- Chat Messages -->
+    <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 chat-messages">
+      <!-- Initial bot message -->
+      <div class="flex items-start space-x-2">
+        <div class="w-8 h-8 rounded-full bg-[#E6F2F2] flex items-center justify-center flex-shrink-0">
+          <i class="fas fa-robot text-[#758b96] text-sm"></i>
+        </div>
+        <div class="message-bubble bot-message bg-[#E6F2F2] text-[#333446]">
+          <p>Halo! Saya SincMe.id Bot, asisten kesehatan mental Anda. 😊</p>
+          <p class="mt-2">Saya di sini untuk mendengarkan, memberikan dukungan, dan membantu Anda menemukan sumber daya yang berguna.</p>
+          <p class="mt-2">Bagaimana perasaan Anda hari ini?</p>
+          
+          <!-- Suggested questions -->
+          <div class="mt-4 flex flex-wrap">
+            <div class="suggested-question" onclick="sendSuggestedMessage('Saya merasa cemas hari ini')">Saya merasa cemas</div>
+            <div class="suggested-question" onclick="sendSuggestedMessage('Saya sedang sedih')">Saya sedang sedih</div>
+            <div class="suggested-question" onclick="sendSuggestedMessage('Apa yang bisa saya lakukan untuk mengatasi stres?')">Tips atasi stres</div>
+            <div class="suggested-question" onclick="sendSuggestedMessage('Saya butuh teknik relaksasi')">Teknik relaksasi</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  document.addEventListener("DOMContentLoaded", () => {
-    updateProfileLabel();
-  });
+    <!-- Chat Input -->
+    <div class="border-t border-[#B8CFCE] p-4">
+      <div class="flex space-x-3">
+        <input 
+          type="text" 
+          id="messageInput" 
+          class="flex-1 border border-[#B8CFCE] rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#B8CFCE] focus:border-transparent text-[#333446]"
+          placeholder="Ketik pesan Anda..."
+          onkeypress="if(event.key === 'Enter') sendMessage()"
+        >
+        <button 
+          id="sendMessage" 
+          class="bg-[#B8CFCE] text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#9ca6bb]"
+          onclick="sendMessage()"
+        >
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
-  // Update label jika localStorage berubah (misal dari tab lain)
-  window.addEventListener("storage", function(e) {
-    if (e.key === "name") {
-        updateProfileLabel();
-    }
-  });
+  <!-- Notifikasi Pop-up -->
+  <div id="notifPopup" class="fixed top-16 right-6 bg-[#ffffff] border border-[#B8CFCE] rounded-lg shadow-lg w-64 p-4 hidden z-50">
+    <h3 class="font-semibold text-[#333446] mb-2">Notifikasi</h3>
+    <ul class="text-sm text-[#758b96] space-y-1">
+      <li>🌟 Cerita baru dari komunitas!</li>
+      <li>🧠 Artikel edukasi baru telah ditambahkan.</li>
+      <li>💬 Seseorang menyukai postinganmu.</li>
+    </ul>
+  </div>
+</main>
 
-
-        
-
-
-    </script>
+<script src="assets/js/chat.js"></script>
 </body>
 </html>

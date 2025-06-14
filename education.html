@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | SincMe.id</title>
+    <title>Education | SincMe.id</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        .sincerely-font {
+            font-family: 'Pacifico', cursive;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #758b96 0%, #B8CFCE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
 </head>
 
 
@@ -39,54 +49,51 @@
 
     <!-- Desktop Sidebar -->
     <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
-        <div class="flex items-center mb-10">
-            <!-- <img src="assets/images/logo.png" alt="SincMe.id
- Logo" class="h-8 mr-2"> -->
-            <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id
-</span>
+        <div class="flex items-center mb-10 overflow-x-visible">
+            <span class="text-3xl font-bold sincerely-font whitespace-nowrap w-full block" style="overflow:visible;">SincMe.id</span>
         </div>
-        
+
         <div class="flex-1">
             <nav class="space-y-4">
-                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-home mr-3"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-book mr-3"></i>
                     <span>Journal</span>
                 </a>
-                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-smile mr-3"></i>
                     <span>Mood Tracker</span>
                 </a>
-                <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-users mr-3"></i>
                     <span>Community</span>
                 </a>
-                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-quote-left mr-3"></i>
                     <span>Daily Quotes</span>
                 </a>
-               <a href="education.html" class="flex items-center p-3 rounded-lg bg-[#F2F2F2] text-[#4A90E2]">
+                <a href="education.html" class="flex items-center p-3 rounded-lg bg-[#E6F2F2] text-[#333446]">
                     <i class="fas fa-book-open mr-3"></i>
                     <span>Education</span>
                 </a>
-
-                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                     <i class="fas fa-robot mr-3"></i>
                     <span>Chatbot</span>
                 </a>
             </nav>
-        </div>      
+        </div>
+
             <div class="pt-4 border-t border-gray-200">
-            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+            <a href="profile.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                 <i class="fas fa-user mr-3"></i>
                 <span id="profileSidebarLabel">Profile</span>
             </a>
             </div>
 
-            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+            <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
                 <i class="fas fa-sign-out-alt mr-3"></i>
                 <span>Logout</span>
             </a>
@@ -105,66 +112,62 @@
           </div>
       </header>
     <!-- Main Content -->
-     <!-- Main Content -->
-      
-<main class=" p-6 space-y-8 min-h-screen">
-<section class=" relative">
-  <h2 class="text-3xl font-semibold mb-8 text-[#4A90E2]">Berita Edukasi Mental Health</h2>
+ <!-- Main Content -->
+<main class="p-6 space-y-8 min-h-screen">
+  
+  <!-- Section: Berita Edukasi -->
+  <section class="relative">
+    <h2 class="text-3xl font-semibold mb-8 text-[#333446]">Berita Edukasi Mental Health</h2>
 
-  <div class="relative rounded-lg shadow-lg bg-white">
+    <div class="relative rounded-lg shadow-lg bg-gradient-to-r from-[#9ca6bb95] to-[#B8CFCE90]">
+      <div id="articleContainer" class="p-8" style="height: 300px; overflow: hidden; transition: height 0.4s ease;">
+        <h3 id="articleTitle" class="text-2xl font-semibold text-[#333446] mb-3"></h3>
+        <p id="articleSummary" class="mb-6 text-[#333446]"></p>
+        <div id="detailContent" style="max-height: 0; overflow-y: auto; transition: max-height 0.4s ease; color: #2d3748;"></div>
+      </div>
 
-    <div id="articleContainer" class="p-8 " style="height: 300px; overflow: hidden; transition: height 0.4s ease;">
-      <h3 id="articleTitle" class="text-2xl font-semibold text-[#4A90E2] mb-3"></h3>
-      <p id="articleSummary" class="mb-6"></p>
-      <div id="detailContent" style="max-height: 0; overflow-y: auto; transition: max-height 0.4s ease; color: #2d3748;"></div>
-    </div>
+      <button id="toggleDetailBtn" class="w-full text-[#333446] hover:underline font-medium">Lihat Penjelasan Lengkap</button>
+<!-- Tombol Previous -->
+<button id="prevBtn" aria-label="Previous article" 
+  class="absolute top-1/2 left-2 -translate-y-1/2 bg-transparent text-[#333446]  rounded-full w-12 h-12 flex items-center justify-center shadow-md hover:bg-[#E6F2F2] focus:outline-none">
+  &#8249;
+</button>
 
-    <button id="toggleDetailBtn" class="w-full text-[#4A90E2] hover:underline font-medium">Lihat Penjelasan Lengkap</button>
+<!-- Tombol Next -->
+<button id="nextBtn" aria-label="Next article" 
+  class="absolute top-1/2 right-2 -translate-y-1/2 bg-transparent text-[#333446]  rounded-full w-12 h-12 flex items-center justify-center shadow-md hover:bg-[#E6F2F2] focus:outline-none">
+  &#8250;
+</button>
 
-    <button id="prevBtn" aria-label="Previous article" 
-      class="absolute top-1/2 left-2 -translate-y-1/2 bg-[#4A90E2] text-white rounded-full w-12 h-12 flex items-center justify-center shadow-md hover:bg-[#357ABD] focus:outline-none">
-      &#8249;
-    </button>
-    <button id="nextBtn" aria-label="Next article" 
-      class="absolute top-1/2 right-2 -translate-y-1/2 bg-[#4A90E2] text-white rounded-full w-12 h-12 flex items-center justify-center shadow-md hover:bg-[#357ABD] focus:outline-none">
-      &#8250;
-    </button>
-  </div>
-</section>
+  </section>
 
-<section class="bg-white rounded-3xl shadow-md overflow-hidden md:flex md:items-center md:gap-10 p-6 md:p-10">
+  <!-- Section: Self Development -->
+  <section class="bg-[#B8CFCE80] rounded-3xl shadow-md overflow-hidden md:flex md:items-center md:gap-10 p-6 md:p-10">
     <!-- Text Content -->
-    <div class="md:w-2/3 space-y-4">
-      <h2 class="text-3xl font-extrabold text-[#4A90E2] leading-snug">
+    <div class="md:w-2/3 space-y-4 text-[#333446]">
+      <h2 class="text-3xl font-extrabold leading-snug">
         ✨ Self Development: Hal Penting untuk Tumbuh Jadi Lebih Baik
       </h2>
-  
-      <p class="text-gray-700 text-base leading-relaxed">
-        Self development atau pengembangan diri adalah proses sadar untuk meningkatkan kualitas hidup dan kemampuan seseorang.
-        Ini mencakup kesadaran diri, pengasahan potensi, hingga pola pikir positif.
+      <p class="text-base leading-relaxed">
+        Self development atau pengembangan diri adalah proses sadar untuk meningkatkan kualitas hidup...
       </p>
-  
-      <p class="text-gray-700 text-base leading-relaxed">
-        Perbedaannya dengan self improvement? Self development bersifat menyeluruh dan jangka panjang. Sedangkan self improvement lebih ke langkah-langkah kecil yang bersifat teknis.
+      <p class="text-base leading-relaxed">
+        Perbedaannya dengan self improvement? Self development bersifat menyeluruh...
       </p>
-  
-      <p class="text-gray-700 text-base leading-relaxed">
-        Orang yang mengembangkan diri biasanya punya kesadaran diri tinggi, lebih teratur, dan punya relasi sosial yang sehat. Caranya? Mulai dari mengenal diri, menetapkan tujuan hidup, hingga menjaga kesehatan mental dan fisik.
+      <p class="text-base leading-relaxed">
+        Orang yang mengembangkan diri biasanya punya kesadaran diri tinggi...
       </p>
-  
-      <p class="text-gray-700 text-base leading-relaxed">
+      <p class="text-base leading-relaxed">
         Jangan lupa, proses ini bukan soal sempurna—tapi tentang jadi lebih baik dari kemarin.
       </p>
-
-      <p class="text-gray-700 text-base leading-relaxed">
+      <p class="text-base leading-relaxed">
         Baca buku, ikut komunitas, belajar dari mentor. Semua langkah kecil ini berarti.
       </p>
-  
-      <p class="text-sm italic text-gray-600 mt-4">
+      <p class="text-sm italic mt-4">
         “Self development bukan sekadar tren—tapi investasi seumur hidup.”
       </p>
     </div>
-  
+
     <!-- Image -->
     <div class="md:w-1/3 flex justify-end mt-6 md:mt-0">
       <img src="https://i.pinimg.com/736x/2f/4b/32/2f4b32010a8c3022585740921ff9641a.jpg"
@@ -172,49 +175,41 @@
            class="rounded-xl w-full h-auto max-w-sm object-contain shadow-sm">
     </div>
   </section>
-  
-  
-  
-  <!-- AI & PSYCHOLOGY SECTION -->
-<section class="bg-white rounded-xl shadow-lg p-6 md:p-10 flex flex-col md:flex-row gap-8 items-start mt-12">
-    <!-- Image content -->
+
+  <!-- Section: AI & PSYCHOLOGY -->
+  <section class="bg-gradient-to-r from-[#B8CFCE80] to-[#9ca6bb90] rounded-xl shadow-lg p-6 md:p-10 flex flex-col md:flex-row gap-8 items-start mt-12 text-[#333446]">
+    <!-- Image -->
     <div class="md:w-1/3 flex justify-start mb-6 md:mb-0">
       <img src="https://i.pinimg.com/736x/ee/86/8d/ee868d114dd93541e8c265982a020459.jpg" 
            alt="AI Psychology Illustration"
            class="rounded-xl w-full h-auto max-w-sm object-contain shadow-sm">
     </div>
-  
-    <!-- Text content -->
+
+    <!-- Text -->
     <div class="md:w-2/3 space-y-5">
-      <h2 class="text-3xl font-extrabold text-[#4A90E2] leading-snug">
+      <h2 class="text-3xl font-extrabold leading-snug">
         🧠 Efektif Pahami Kesehatan Mental: 5 Penerapan AI dalam Psikologi
       </h2>
-  
-      <p class="text-gray-700 text-base leading-relaxed">
-        Kecerdasan buatan (AI) kini semakin berkembang dan dimanfaatkan di berbagai bidang, termasuk psikologi dan kesehatan mental.
-        Dengan dukungan machine learning, AI mampu menganalisis data, mengenali pola perilaku, bahkan melakukan prediksi terhadap kondisi psikologis seseorang.
+      <p class="text-base leading-relaxed">
+        Kecerdasan buatan (AI) kini semakin berkembang dan dimanfaatkan di berbagai bidang, termasuk psikologi...
       </p>
-  
-      <p class="text-gray-700 text-base leading-relaxed">
-        AI berperan dalam mendeteksi dini gangguan psikologis, memperluas akses layanan psikologi digital, hingga menganalisis interaksi daring dan media sosial.
-        Bahkan, teknologi ini dapat memprediksi risiko gangguan serius, termasuk tindakan ekstrem seperti bunuh diri.
+      <p class="text-base leading-relaxed">
+        AI berperan dalam mendeteksi dini gangguan psikologis, memperluas akses layanan...
       </p>
-  
-      <p class="text-gray-700 text-base leading-relaxed">
-        Selain itu, AI juga meningkatkan efektivitas terapi dengan data real-time dan personalisasi pendekatan berdasarkan emosi dan perilaku pengguna.
-        Contoh konkretnya adalah chatbot psikologis, aplikasi interaktif edukasi mental, hingga teknologi analisis ekspresi wajah dan suara untuk mendeteksi emosi.
+      <p class="text-base leading-relaxed">
+        Selain itu, AI juga meningkatkan efektivitas terapi dengan data real-time dan pendekatan personal.
       </p>
-  
-      <p class="text-gray-700 text-base leading-relaxed">
-        AI bukan pengganti profesional psikologi, namun menjadi alat bantu yang powerful untuk mendukung proses pemahaman dan pemulihan kesehatan mental yang lebih luas, cepat, dan efisien.
+      <p class="text-base leading-relaxed">
+        AI bukan pengganti profesional psikologi, namun alat bantu yang powerful.
       </p>
-  
-      <p class="text-sm italic text-gray-600 mt-4">
+      <p class="text-sm italic mt-4">
         "Dengan dukungan AI, pemahaman terhadap kesehatan mental kini bisa lebih cepat dan terjangkau oleh semua orang."
       </p>
     </div>
-  </section>  
+  </section>
 </main>
+
+
 
     <script src="assets/js/education.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

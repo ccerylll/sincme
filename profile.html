@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Journal | SincMe.id</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   <link rel="stylesheet" href="assets/css/style.css"/>
   <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"/>
@@ -34,6 +34,14 @@
     .mood-option input:checked + div {
       box-shadow: 0 0 0 2px currentColor;
     }
+    .sincerely-font {
+      font-family: 'Pacifico', cursive;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #758b96 0%, #B8CFCE 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   </style>
 </head>
 <body class="font-poppins bg-[#F2F2F2] text-gray-800">
@@ -44,7 +52,7 @@
       <i class="fas fa-home text-xl"></i>
       <span class="text-xs mt-1">Home</span>
     </a>
-    <a href="journal.html" class="text-[#4A90E2] flex flex-col items-center">
+    <a href="journal.html" class="text-gray-500 flex flex-col items-center">
       <i class="fas fa-book text-xl"></i>
       <span class="text-xs mt-1">Journal</span>
     </a>
@@ -56,59 +64,60 @@
       <i class="fas fa-users text-xl"></i>
       <span class="text-xs mt-1">Community</span>
     </a>
-    <a href="profile.html" class="text-gray-500 flex flex-col items-center">
+    <a href="profile.html" class="text-[#4A90E2] flex flex-col items-center">
       <i class="fas fa-user text-xl"></i>
       <span class="text-xs mt-1">Profile</span>
     </a>
   </div>
 
-  <!-- Desktop Sidebar -->
-  <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
-    <div class="flex items-center mb-10">
-      <span class="text-xl font-semibold text-[#4A90E2]">SincMe.id</span>
-    </div>
-    <div class="flex-1">
-      <nav class="space-y-4">
-        <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-          <i class="fas fa-home mr-3"></i>
-          <span>Dashboard</span>
-        </a>
-        <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-          <i class="fas fa-book mr-3"></i>
-          <span>Journal</span>
-        </a>
-        <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-          <i class="fas fa-smile mr-3"></i>
-          <span>Mood Tracker</span>
-        </a>
-        <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-          <i class="fas fa-users mr-3"></i>
-          <span>Community</span>
-        </a>
-        <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-          <i class="fas fa-quote-left mr-3"></i>
-          <span>Daily Quotes</span>
-        </a>
-        <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-          <i class="fas fa-book-open mr-3"></i>
-          <span>Education</span>
-        </a>
-        <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
-          <i class="fas fa-robot mr-3"></i>
-          <span>Chatbot</span>
-        </a>
-      </nav>
-    </div>
+    <!-- Desktop Sidebar -->
+    <div class="hidden md:flex fixed left-0 top-0 bottom-0 w-64 bg-white shadow-sm flex-col p-6">
+        <div class="flex items-center mb-10 overflow-x-visible">
+            <span class="text-3xl font-bold sincerely-font whitespace-nowrap w-full block" style="overflow:visible;">SincMe.id</span>
+        </div>
+
+        <div class="flex-1">
+            <nav class="space-y-4">
+                <a href="dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="journal.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+                    <i class="fas fa-book mr-3"></i>
+                    <span>Journal</span>
+                </a>
+                <a href="mood.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+                    <i class="fas fa-smile mr-3"></i>
+                    <span>Mood Tracker</span>
+                </a>
+                <a href="stories.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+                    <i class="fas fa-users mr-3"></i>
+                    <span>Community</span>
+                </a>
+                <a href="quotes.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+                    <i class="fas fa-quote-left mr-3"></i>
+                    <span>Daily Quotes</span>
+                </a>
+                <a href="education.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+                    <i class="fas fa-book-open mr-3"></i>
+                    <span>Education</span>
+                </a>
+                <a href="chatbot.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
+                    <i class="fas fa-robot mr-3"></i>
+                    <span>Chatbot</span>
+                </a>
+            </nav>
+        </div>
 
         <div class="pt-4 border-t border-gray-200">
-        <a href="profile.html" class="flex items-center p-3 rounded-lg bg-[#F2F2F2] text-[#4A90E2]">
+        <a href="profile.html" class="flex items-center p-3 rounded-lg bg-[#E6F2F2] text-[#333446]">
             <i class="fas fa-user mr-3"></i>
             <span id="profileSidebarLabel">Profile</span>
         </a>
         </div>
         
       </a>
-      <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#F2F2F2] text-gray-600">
+      <a href="logout.html" class="flex items-center p-3 rounded-lg hover:bg-[#E6F2F2] text-[#758b96]">
         <i class="fas fa-sign-out-alt mr-3"></i>
         <span>Logout</span>
       </a>
@@ -120,87 +129,89 @@
     <!-- Top Bar -->
     <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-40 flex justify-between items-center">
       <div>
-        <h1 class="text-2xl font-semibold text-gray-800">Profile</h1>
+        <h1 class="text-2xl font-semibold text-[#333446]">Profile</h1>
       </div>
       <div class="flex items-center space-x-4">
         <button class="p-2 rounded-full hover:bg-[#F2F2F2]">
           <i class="fas fa-bell text-gray-600"></i>
         </button>
+
+          <!-- Logout hanya muncul di HP -->
+      <a href="logout.html" class="p-2 rounded-full hover:bg-[#F2F2F2] md:hidden" title="Logout">
+        <i class="fas fa-sign-out-alt text-gray-600"></i>
+      </a>
         <div class="flex items-center">
       </div>
     </header>
 
     <!-- Profile Section -->
-   <section class="w-full min-h-screen bg-gradient-to-b from-[#758b96] to-[#9ca6bb] px-6 py-10">
-      <div class="max-w-4xl mx-auto bg-white profile-card rounded-3xl p-8 relative overflow-hidden">
+<section class="w-full min-h-screen bg-gradient-to-b from-[#B8CFCE] to-[#9ca6bb] px-6 py-10">
+  <div class="max-w-4xl mx-auto bg-white profile-card rounded-3xl p-8 relative overflow-hidden">
 
-        <!-- Decorative Circle -->
-        <div class="absolute -top-10 -right-10 bg-[#9ca6bb] opacity-20 w-48 h-48 rounded-full blur-3xl z-0"></div>
+    <!-- Decorative Circle -->
+    <div class="absolute -top-10 -right-10 bg-[#9ca6bb] opacity-20 w-48 h-48 rounded-full blur-3xl z-0"></div>
 
-        <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
-          <!-- Avatar -->
-          <div class="relative">
-            <div id="avatarPreview" class="w-28 h-28 rounded-full bg-[#758b96] text-white text-3xl flex items-center justify-center font-bold shadow-md overflow-hidden"></div>
-            <input type="file" id="avatarInput" class="absolute inset-0 opacity-0 cursor-pointer" />
-          </div>
-
-          <!-- Info -->
-          <div class="flex-1 space-y-2 text-center md:text-left">
-            <h2 id="displayName" class="text-3xl font-bold text-[#333]">Andini</h2>
-            <p id="displayEmail" class="text-gray-600">andini@email.com</p>
-            <p class="italic text-[#758b96]" id="moodStatus">“Saat ini kamu merasa: 😊 Tenang”</p>
-          </div>
-
-          <!-- Mood Progress -->
-
-
-         <!-- Tanggal update terakhir -->
-        <p id="lastUpdated" class="text-xs text-gray-500 italic mt-1">Terakhir diperbarui: -</p>
-
-        <!-- Fun Fact -->
-        <div id="funFact" class="mt-4 text-sm bg-[#f0f4f8] text-[#333] px-4 py-3 rounded-xl border border-[#dee2e6]">
-        💬 <span id="randomFact">Kamu hebat, jangan menyerah ya!</span>
-         </div>
-
-          <div>
-            <button id="editBtn" class="bg-[#758b96] text-white px-4 py-2 rounded-full hover:bg-[#5f6c74] transition">Edit Profil</button>
-          </div>
-        </div>
-
- <!-- Tambahan di dalam <form id="profileForm" ...> -->
-<form id="profileForm" class="mt-8 space-y-4 relative z-10 hidden">
-  <div>
-    <label class="block text-sm font-medium text-gray-700">Nama</label>
-    <input type="text" id="name" class="w-full border rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#758b96]">
-  </div>
-  <div>
-    <label class="block text-sm font-medium text-gray-700">Email</label>
-    <input type="email" id="email" class="w-full border rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#758b96]">
-  </div>
-  <div>
-    <label class="block text-sm font-medium text-gray-700">Bio / Catatan Diri</label>
-    <textarea id="bio" class="w-full border rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#758b96]" rows="3"></textarea>
-  </div>
-  <div>
-    <label class="block text-sm font-medium text-gray-700">Status Emosi</label>
-    <select id="mood" class="w-full border rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#758b96]">
-      <option value="">-- Pilih mood --</option>
-      <option>Tenang</option>
-      <option>Bahagia</option>
-      <option>Cemas</option>
-      <option>Sedih</option>
-      <option>Fokus</option>
-    </select>
-  </div>
-  <div class="flex justify-between">
-    <button type="button" id="cancelBtn" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-400 transition">Batal</button>
-    <button type="submit" class="bg-[#758b96] text-white px-6 py-2 rounded-full hover:bg-[#5f6c74] transition">Simpan</button>
-  </div>
-</form>
-
-<p id="formError" class="text-red-500 text-sm mt-2 hidden">Semua kolom harus diisi!</p>
+    <!-- FLEX CONTAINER -->
+    <div class="relative z-10 flex flex-col md:flex-row md:flex-wrap md:justify-between items-stretch gap-6">
+      <!-- Avatar -->
+      <div class="relative">
+        <div id="avatarPreview" class="w-28 h-28 rounded-full bg-[#758b96] text-white text-3xl flex items-center justify-center font-bold shadow-md overflow-hidden"></div>
+        <input type="file" id="avatarInput" class="absolute inset-0 opacity-0 cursor-pointer" />
       </div>
-    </section>
+
+      <!-- Info -->
+      <div class="flex-1 min-w-0 space-y-2 text-center md:text-left">
+        <h2 id="displayName" class="text-3xl font-bold text-[#333446] break-words">Username</h2>
+        <p id="displayEmail" class="text-[#333446]">user@email.com</p>
+        <p class="italic text-[#758b96]" id="moodStatus">“Saat ini kamu merasa: 😊 Tenang”</p>
+        <p id="lastUpdated" class="text-xs text-[#333446] italic">Terakhir diperbarui: -</p>
+        <div id="funFact" class="mt-4 text-sm bg-[#f0f4f8] text-[#333446] px-4 py-3 rounded-xl border border-[#dee2e6]">
+          💬 <span id="randomFact">Kamu hebat, jangan menyerah ya!</span>
+        </div>
+      </div>
+
+      <!-- Tombol Edit -->
+      <div class="w-full md:w-auto mt-4 self-center md:self-start">
+        <button id="editBtn" class="bg-[#758b96] text-white px-4 py-2 rounded-full hover:bg-[#B8CFCE] transition w-full md:w-auto">
+          Edit Profil
+        </button>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <form id="profileForm" class="mt-8 space-y-4 relative z-10 hidden">
+      <div>
+        <label class="block text-sm font-medium text-[#333446]">Nama</label>
+        <input type="text" id="name" class="w-full border rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#758b96] text-[#333446]">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-[#333446]">Email</label>
+        <input type="email" id="email" class="w-full border rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#758b96] text-[#333446]">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-[#333446]">Bio / Catatan Diri</label>
+        <textarea id="bio" class="w-full border rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#758b96] text-[#333446]" rows="3"></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-[#333446]">Status Emosi</label>
+        <select id="mood" class="w-full border rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#758b96] text-[#333446]">
+          <option value="">-- Pilih mood --</option>
+          <option>Tenang</option>
+          <option>Bahagia</option>
+          <option>Cemas</option>
+          <option>Sedih</option>
+          <option>Fokus</option>
+        </select>
+      </div>
+      <div class="flex justify-between">
+        <button type="button" id="cancelBtn" class="bg-gray-300 text-[#333446] px-6 py-2 rounded-full hover:bg-gray-400 transition">Batal</button>
+        <button type="submit" class="bg-[#758b96] text-white px-6 py-2 rounded-full hover:bg-[#B8CFCE] transition">Simpan</button>
+      </div>
+    </form>
+
+    <p id="formError" class="text-red-500 text-sm mt-2 hidden">Semua kolom harus diisi!</p>
+  </div>
+</section>
   </div>
 
 <script src="assets/js/profile.js"></script>
