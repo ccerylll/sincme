@@ -1,139 +1,146 @@
-// Quotes data
-const quotes = [
-    {
-        text: "Tidak apa-apa untuk tidak baik-baik saja. Yang penting kamu jujur dengan dirimu sendiri.",
-        author: "SafeSpace Team"
-    },
-    {
-        text: "Kamu lebih kuat dari yang kamu kira. Percayalah pada proses dan teruslah melangkah, sekecil apa pun itu.",
-        author: "SafeSpace Team"
-    },
-    {
-        text: "Istirahat bukanlah tanda kelemahan, tapi bagian dari perawatan diri yang penting.",
-        author: "SafeSpace Team"
-    },
-    {
-        text: "Perasaanmu valid, apapun itu. Kamu berhak merasakannya tanpa perlu merasa bersalah.",
-        author: "SafeSpace Team"
-    },
-    {
-        text: "Langkah kecil tetap membawamu maju. Rayakan setiap kemajuan, sekecil apapun.",
-        author: "SafeSpace Team"
-    }
-];
-
+// ========== Update Nama di Sidebar ==========
 document.addEventListener("DOMContentLoaded", () => {
-    const name = localStorage.getItem("name");
-    const profileLabel = document.getElementById("profileSidebarLabel");
-
-    if (profileLabel) {
-      if (name && name.trim() !== "") {
-        profileLabel.textContent = name;
-      } else {
-        profileLabel.textContent = "Profile";
-      }
-    }
-
-    updateProfileLabel();
-  });
-
-// DOM Elements
-const quotePopup = document.getElementById('quotePopup');
-const popupQuoteText = document.getElementById('popupQuoteText');
-const popupQuoteAuthor = document.getElementById('popupQuoteAuthor');
-const closeQuotePopup = document.getElementById('closeQuotePopup');
-const addToFavorites = document.getElementById('addToFavorites');
-const dailyQuoteToggle = document.getElementById('dailyQuoteToggle');
-const dailyQuoteText = document.getElementById('dailyQuoteText');
-const dailyQuoteAuthor = document.getElementById('dailyQuoteAuthor');
-const refreshQuote = document.getElementById('refreshQuote');
-const saveFavorite = document.getElementById('saveFavorite');
-
-// Show random quote
-function showRandomQuote() {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const quote = quotes[randomIndex];
-    
-    popupQuoteText.textContent = quote.text;
-    popupQuoteAuthor.textContent = `- ${quote.author}`;
-    dailyQuoteText.textContent = quote.text;
-    dailyQuoteAuthor.textContent = `- ${quote.author}`;
-    
-    return quote;
-}
-
-// Show popup with animation
-function showQuotePopup() {
-    quotePopup.classList.remove('translate-y-4', 'opacity-0', 'invisible');
-    quotePopup.classList.add('translate-y-0', 'opacity-100', 'visible');
-}
-
-// Hide popup with animation
-function hideQuotePopup() {
-    quotePopup.classList.remove('translate-y-0', 'opacity-100', 'visible');
-    quotePopup.classList.add('translate-y-4', 'opacity-0', 'invisible');
-}
-
-// Check if should show popup (once per day)
-function shouldShowPopup() {
-    const lastShown = localStorage.getItem('lastQuoteShown');
-    if (!lastShown) return true;
-    
-    const lastDate = new Date(lastShown);
-    const today = new Date();
-    
-    return lastDate.getDate() !== today.getDate() || 
-           lastDate.getMonth() !== today.getMonth() || 
-           lastDate.getFullYear() !== today.getFullYear();
-}
-
-// Event Listeners
-closeQuotePopup.addEventListener('click', hideQuotePopup);
-refreshQuote.addEventListener('click', showRandomQuote);
-saveFavorite.addEventListener('click', function() {
-    this.innerHTML = '<i class="fas fa-heart mr-1"></i><span class="text-sm">Tersimpan</span>';
-    this.classList.add('text-[#4A90E2]');
-});
-
-addToFavorites.addEventListener('click', function() {
-    this.innerHTML = '<i class="fas fa-heart mr-1"></i><span class="text-sm">Tersimpan</span>';
-    this.classList.add('text-[#4A90E2]');
-});
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    showRandomQuote();
-    
-    // Show popup if enabled and not shown today
-    if (dailyQuoteToggle.checked && shouldShowPopup()) {
-        setTimeout(() => {
-            showQuotePopup();
-            localStorage.setItem('lastQuoteShown', new Date().toISOString());
-        }, 3000);
-    }
-    
-    // Save popup preference
-    dailyQuoteToggle.addEventListener('change', function() {
-        localStorage.setItem('dailyQuoteEnabled', this.checked);
-    });
-    
-    // Load popup preference
-    const isEnabled = localStorage.getItem('dailyQuoteEnabled') !== 'false';
-    dailyQuoteToggle.checked = isEnabled;
-});
-function updateProfileLabel() {
   const name = localStorage.getItem("name");
   const profileLabel = document.getElementById("profileSidebarLabel");
+
   if (profileLabel) {
     if (name && name.trim() !== "") {
-      if( name.length > 15) {
-        profileLabel.textContent = name.substring(0, 15) + '...';
-      } else {
-      profileLabel.textContent = name;
-      }
+      profileLabel.textContent = name.length > 15 ? name.substring(0, 15) + "..." : name;
     } else {
       profileLabel.textContent = "Profile";
     }
   }
+
+  // Jalankan bagian quote setelah DOM siap
+  loadFavorites();
+  getDailyQuote();
+  renderDailyQuote();
+  renderFavorites();
+});
+
+// ========== Data Quotes ==========
+const quotes = [
+  {
+    id: 1,
+    text: "Jangan pernah meremehkan langkah kecil, karena itu tetap membawamu maju.",
+    author: "SincMe.id Team"
+  },
+  {
+    id: 2,
+    text: "Hari ini adalah kesempatan untuk menjadi versi terbaik dirimu.",
+    author: "Anonim"
+  },
+  {
+    id: 3,
+    text: "Kamu berharga, bahkan saat kamu merasa tidak.",
+    author: "SincMe.id"
+  },
+  {
+    id: 4,
+    text: "Kesulitan hari ini adalah kekuatan besok.",
+    author: "Seseorang Bijak"
+  }
+];
+
+let favoriteQuotes = new Set();
+let todayQuote = null;
+
+// ========== LocalStorage Favorite ==========
+function loadFavorites() {
+  const storedFavorites = localStorage.getItem("favoriteQuotes");
+  if (storedFavorites) {
+    try {
+      favoriteQuotes = new Set(JSON.parse(storedFavorites));
+    } catch {
+      favoriteQuotes = new Set();
+    }
+  }
 }
 
+function saveFavorites() {
+  localStorage.setItem("favoriteQuotes", JSON.stringify([...favoriteQuotes]));
+}
+
+// ========== Random Quote Harian ==========
+function getDailyQuote() {
+  const todayKey = new Date().toISOString().split("T")[0];
+  const stored = JSON.parse(localStorage.getItem("dailyQuote") || "{}");
+
+  if (stored.date === todayKey) {
+    todayQuote = quotes.find(q => q.id === stored.id);
+  } else {
+    const random = quotes[Math.floor(Math.random() * quotes.length)];
+    todayQuote = random;
+    localStorage.setItem("dailyQuote", JSON.stringify({ date: todayKey, id: random.id }));
+  }
+}
+
+// ========== Render Quote Hari Ini ==========
+function renderDailyQuote() {
+  const container = document.getElementById("quote-of-day");
+  container.innerHTML = "";
+
+  const isFavorited = favoriteQuotes.has(todayQuote.id);
+
+  const card = document.createElement("div");
+  card.className = "bg-white rounded-lg p-6 shadow relative";
+
+  card.innerHTML = `
+    <div class="text-3xl text-gray-300 absolute top-2 left-2">“</div>
+    <p class="italic text-gray-700 pl-6 pr-8">${todayQuote.text}</p>
+    <div class="text-right text-sm text-gray-500 mt-2">- ${todayQuote.author}</div>
+    <button 
+      class="absolute top-2 right-2 text-xl transition-colors ${
+        isFavorited ? "text-pink-500" : "text-gray-400 hover:text-pink-400"
+      }" 
+      onclick="toggleFavorite(${todayQuote.id})">
+      <i class="fas fa-heart"></i>
+    </button>
+  `;
+  container.appendChild(card);
+}
+
+// ========== Render Quote Favorit ==========
+function renderFavorites() {
+  const favContainer = document.getElementById("favorite-list");
+  const noFavMsg = document.getElementById("no-fav-msg");
+
+  favContainer.innerHTML = "";
+  const favs = quotes.filter(q => favoriteQuotes.has(q.id));
+
+  if (favs.length === 0) {
+    noFavMsg.style.display = "block";
+    return;
+  }
+
+  noFavMsg.style.display = "none";
+
+  favs.forEach(quote => {
+    const card = document.createElement("div");
+    card.className = "bg-pink-50 rounded-lg p-4 shadow relative border border-pink-100";
+
+    card.innerHTML = `
+      <div class="text-3xl text-pink-300 absolute top-2 left-2">“</div>
+      <p class="italic text-pink-800 pl-6 pr-6">${quote.text}</p>
+      <div class="text-right text-sm text-pink-500 mt-2">- ${quote.author}</div>
+      <button 
+        class="absolute top-2 right-2 text-xl text-pink-500 hover:text-pink-600"
+        onclick="toggleFavorite(${quote.id})">
+        <i class="fas fa-heart"></i>
+      </button>
+    `;
+    favContainer.appendChild(card);
+  });
+}
+
+// ========== Toggle Favorite ==========
+function toggleFavorite(id) {
+  if (favoriteQuotes.has(id)) {
+    favoriteQuotes.delete(id);
+  } else {
+    favoriteQuotes.add(id);
+  }
+  saveFavorites();
+  renderDailyQuote();
+  renderFavorites();
+}
