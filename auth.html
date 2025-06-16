@@ -193,8 +193,12 @@
                 <!-- Email Register -->
                 <form id="registerEmailForm" class="space-y-4">
                     <div>
-                        <label for="registerName" class="block text-sm font-medium text-[#333446] mb-1">Nama Lengkap</label>
-                        <input type="text" id="registerName" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="Nama kamu" required>
+                        <label for="registerFirstName" class="block text-sm font-medium text-[#333446] mb-1">Nama Depan</label>
+                        <input type="text" id="registerFirstName" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="Nama depan kamu" required>
+                    </div>
+                    <div>
+                        <label for="registerLastName" class="block text-sm font-medium text-[#333446] mb-1">Nama Belakang</label>
+                        <input type="text" id="registerLastName" class="w-full input-field rounded-lg py-3 px-4 focus:outline-none" placeholder="Nama belakang kamu" required>
                     </div>
                     <div>
                         <label for="registerEmail" class="block text-sm font-medium text-[#333446] mb-1">Email</label>
@@ -237,70 +241,49 @@
         </div>
     </div>
 
-    <script src="assets/js/auth.js"></script>
-    <script>
-        // Toggle between login and register forms with animation
-        function showForm(formToShow) {
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-            if (formToShow === 'register') {
-                loginForm.classList.add('hidden');
-                registerForm.classList.remove('hidden');
-                registerForm.classList.add('fade-in');
-                setTimeout(() => registerForm.classList.remove('fade-in'), 600);
-            } else {
-                registerForm.classList.add('hidden');
-                loginForm.classList.remove('hidden');
-                loginForm.classList.add('fade-in');
-                setTimeout(() => loginForm.classList.remove('fade-in'), 600);
-            }
-        }
-        document.getElementById('showRegister').addEventListener('click', function() {
-            showForm('register');
-        });
-        document.getElementById('showLogin').addEventListener('click', function() {
-            showForm('login');
-        });
+    <!-- Load JS Terakhir -->
+<script src="assets/js/auth.js"></script>
 
-        // Toggle password visibility
-        function setupPasswordToggle(buttonId, inputId) {
-            const button = document.getElementById(buttonId);
-            const input = document.getElementById(inputId);
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                input.setAttribute('type', type);
-                button.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
-            });
-        }
-        setupPasswordToggle('toggleLoginPassword', 'loginPassword');
-        setupPasswordToggle('toggleRegisterPassword', 'registerPassword');
-        setupPasswordToggle('toggleRegisterConfirmPassword', 'registerConfirmPassword');
+<script>
+  // Toggle antara login dan register form
+  document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
 
-        // Simple validation for register
-        document.getElementById('registerEmailForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const pass = document.getElementById('registerPassword').value;
-            const confirm = document.getElementById('registerConfirmPassword').value;
-            if (pass.length < 8) {
-                alert('Password minimal 8 karakter.');
-                return;
-            }
-            if (pass !== confirm) {
-                alert('Konfirmasi password tidak cocok.');
-                return;
-            }
-            alert('Registration functionality would be implemented here');
-            // window.location.href = 'dashboard.html';
-        });
+    document.getElementById('showRegister').addEventListener('click', function () {
+      loginForm.classList.add('hidden');
+      registerForm.classList.remove('hidden');
+      registerForm.classList.add('fade-in');
+      setTimeout(() => registerForm.classList.remove('fade-in'), 600);
+    });
 
-        // Login validation (dummy)
-        document.getElementById('loginEmailForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // In a real app, you would handle login here
-            alert('Login functionality would be implemented here');
-            // window.location.href = 'dashboard.html';
-        });
-    </script>
+    document.getElementById('showLogin').addEventListener('click', function () {
+      registerForm.classList.add('hidden');
+      loginForm.classList.remove('hidden');
+      loginForm.classList.add('fade-in');
+      setTimeout(() => loginForm.classList.remove('fade-in'), 600);
+    });
+
+    // Toggle password visibility
+    setupPasswordToggle('toggleLoginPassword', 'loginPassword');
+    setupPasswordToggle('toggleRegisterPassword', 'registerPassword');
+    setupPasswordToggle('toggleRegisterConfirmPassword', 'registerConfirmPassword');
+  });
+
+  function setupPasswordToggle(buttonId, inputId) {
+    const button = document.getElementById(buttonId);
+    const input = document.getElementById(inputId);
+    if (!button || !input) return;
+
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+      input.setAttribute('type', type);
+      button.innerHTML = type === 'password'
+        ? '<i class="far fa-eye"></i>'
+        : '<i class="far fa-eye-slash"></i>';
+    });
+  }
+</script>
 </body>
 </html>
