@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', function() {
             // Set focus to input when page loads
             document.getElementById('messageInput').focus();
@@ -30,6 +28,16 @@ document.addEventListener('DOMContentLoaded', function() {
             sendMessage();
         }
         
+        function getUserAvatarHtml() {
+          const avatar = localStorage.getItem("avatar");
+          const name = localStorage.getItem("name") || "A";
+          if (avatar) {
+            return `<img src="${avatar}" class="w-8 h-8 rounded-full object-cover" alt="Avatar">`;
+          } else {
+            return `<span class="text-sm font-medium">${name.charAt(0).toUpperCase()}</span>`;
+          }
+        }
+        
         function addMessageToChat(message, sender) {
             const chatMessages = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
@@ -41,14 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p>${message}</p>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                        <span class="text-sm font-medium">A</span>
+                        ${getUserAvatarHtml()}
                     </div>
                 `;
             } else if (sender === 'bot') {
                 messageDiv.className = 'flex items-start space-x-2';
                 messageDiv.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-robot text-blue-500 text-sm"></i>
+                    <div class="w-8 h-8 rounded-full bg-[#E6F2F2] flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-[#758b96] text-sm"></i>
                     </div>
                     <div class="message-bubble bot-message">
                         <p class="text-gray-800">${message}</p>
@@ -66,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
             typingDiv.className = 'flex items-start space-x-2';
             typingDiv.id = 'typingIndicator';
             typingDiv.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-robot text-blue-500 text-sm"></i>
+                <div class="w-8 h-8 rounded-full bg-[#E6F2F2] flex items-center justify-center flex-shrink-0">
+                    <i class="fas fa-robot text-[#758b96] text-sm"></i>
                 </div>
                 <div class="message-bubble bot-message typing-indicator">
                     <span></span>
@@ -175,4 +183,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  

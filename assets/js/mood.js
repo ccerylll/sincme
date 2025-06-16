@@ -1,6 +1,7 @@
 /* ========= 1.  GLOBALS & STORAGE HELPERS  ============================ */
 let weeklyMoodChart, moodDistChart;
 let moodEntries = loadJSON('moodEntries', []);       // [{date:'YYYY-MM-DD', mood:3, note:'…'}]
+let currentWeekOffset = 0; // 0 = minggu ini, -1 = minggu lalu, dst
 
 function loadJSON (key, fallback) {
   try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
@@ -22,21 +23,29 @@ function addMoodEntry (moodVal, noteText) {
 }
 
 /* ========= 3.  DERIVED DATA  ======================================== */
-function getWeeklySeries () {
+function getWeeklySeries(weekOffset = 0) {
   const data   = [];
   const labels = [];
   const today  = new Date();
 
-  for (let i = 6; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
+  // Hitung Senin minggu yang diinginkan
+  const day = today.getDay(); // 0 = Minggu, 1 = Senin, ..., 6 = Sabtu
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - ((day + 6) % 7) + (weekOffset * 7));
+  // Cari hari Minggu minggu ini
+  // const sunday = new Date(monday);
+  // sunday.setDate(monday.getDate() + 6);
+
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
 
     const dayLabel = d.toLocaleDateString('id-ID', { weekday: 'short' }); // Sen, Sel, …
     labels.push(dayLabel);
 
     const dateKey  = d.toISOString().slice(0,10);
     const entryForDay = moodEntries.find(e => e.date === dateKey);
-    data.push(entryForDay ? entryForDay.mood : null);                   // null = gap
+    data.push(entryForDay ? entryForDay.mood : null); // null = gap
   }
   return { labels, data };
 }
@@ -49,7 +58,7 @@ function getDistributionCounts () {
 
 /* ========= 4.  RENDER CHARTS  ======================================= */
 function initMoodCharts () {
-  const { labels, data } = getWeeklySeries();
+  const { labels, data } = getWeeklySeries(currentWeekOffset);
   const distData         = getDistributionCounts();
 
   const weeklyCtx = document.getElementById('weeklyMoodChart');
@@ -118,6 +127,31 @@ function initMoodCharts () {
   }
 }
 
+// Fungsi untuk menampilkan rentang minggu berjalan (Senin-Minggu)
+function setWeeklyRangeLabel(weekOffset = 0) {
+  const rangeSpan = document.getElementById('weeklyRange');
+  if (!rangeSpan) return;
+
+  const today = new Date();
+  const day = today.getDay();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - ((day + 6) % 7) + (weekOffset * 7));
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+
+  // Format tanggal
+  const options = { day: '2-digit', month: 'short' };
+  const startStr = monday.toLocaleDateString('id-ID', options);
+  const endStr = sunday.toLocaleDateString('id-ID', options);
+
+  // Jika bulan sama, tampilkan hanya tanggal saja di awal
+  if (monday.getMonth() === sunday.getMonth()) {
+    rangeSpan.textContent = `${monday.getDate()}-${sunday.getDate()} ${endStr.split(' ')[1]}`;
+  } else {
+    rangeSpan.textContent = `${startStr} - ${endStr}`;
+  }
+}
+
 /* ========= 5.  MOOD HISTORY LIST  (table version)  ================== */
 function renderMoodHistory () {
   const tbody = document.getElementById('moodHistoryBody');
@@ -172,8 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addMoodEntry(+sel.value, noteText);
     initMoodCharts();             // redraw both charts
     renderMoodHistory();          // refresh list
-
-    alert('Mood kamu hari ini berhasil disimpan!');
+    setWeeklyRangeLabel(); // Tambahkan ini agar label minggu update jika user ganti tanggal sistem
 
     /* Reset form */
     sel.checked = false;
@@ -181,9 +214,31 @@ document.addEventListener('DOMContentLoaded', () => {
     saveBtn.disabled = true;
   });
 
+  // Tombol prev/next minggu (gunakan selector yang pasti)
+  const prevWeekBtn = document.querySelector('.fa-chevron-left')?.closest('button');
+  const nextWeekBtn = document.querySelector('.fa-chevron-right')?.closest('button');
+
+  if (prevWeekBtn) {
+    prevWeekBtn.addEventListener('click', () => {
+      currentWeekOffset--;
+      setWeeklyRangeLabel(currentWeekOffset);
+      initMoodCharts();
+    });
+  }
+  if (nextWeekBtn) {
+    nextWeekBtn.addEventListener('click', () => {
+      if (currentWeekOffset < 0) {
+        currentWeekOffset++;
+        setWeeklyRangeLabel(currentWeekOffset);
+        initMoodCharts();
+      }
+    });
+  }
+
   /* --- first paint --- */
   initMoodCharts();
   renderMoodHistory();
+  setWeeklyRangeLabel(currentWeekOffset);
 });
 
 /* ========= 7.  YOUR EXISTING MODAL & PROFILE CODE  (unchanged) ======= */

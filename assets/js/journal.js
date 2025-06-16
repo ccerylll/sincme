@@ -296,6 +296,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Save to localStorage
                     localStorage.setItem('journals', JSON.stringify(this.journals));
+                    // Trigger storage event for other tabs (dashboard)
+                    window.dispatchEvent(new Event('storage'));
                     
                     // Refresh UI
                     this.renderCalendar();
@@ -309,6 +311,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 deleteJournal: function() {
                     this.journals = this.journals.filter(j => j.id !== this.selectedJournal.id);
                     localStorage.setItem('journals', JSON.stringify(this.journals));
+                    // Trigger storage event for other tabs (dashboard)
+                    window.dispatchEvent(new Event('storage'));
                     this.renderCalendar();
                     this.renderJournals();
                     this.closeDeleteModal();

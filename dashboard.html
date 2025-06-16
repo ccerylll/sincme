@@ -157,7 +157,9 @@
 <main class="p-6">
   <!-- Welcome Section -->
   <div class="bg-gradient-to-r from-[#B8CFCE] to-[#9ca6bb] rounded-xl p-6 mb-6 text-white">
-    <h2 class="text-2xl text-[#333446] font-semibold mb-2">Halo, User 👋</h2>
+    <h2 class="text-2xl text-[#333446] font-semibold mb-2">
+      Halo, <span id="dashboardGreetingName">User</span> 👋
+    </h2>
     <p class="mb-4 text-[#ffffff]">Bagaimana perasaanmu hari ini?</p>
     <div class="flex space-x-3">
       <a href="mood.html" class="bg-white text-[#333446] px-4 py-2 rounded-lg font-medium hover:bg-[#E6F2F2] transition">Check-in Mood</a>
@@ -199,29 +201,8 @@
       <h3 class="text-xl font-medium text-[#333446]">Jurnal Terakhir</h3>
       <a href="journal.html" class="text-sm text-[#758b96] hover:text-[#9ca6bb]">Lihat Semua</a>
     </div>
-    <div class="space-y-4">
-      <div class="border-b border-[#E6F2F2] pb-4">
-        <div class="flex justify-between items-start mb-1">
-          <h4 class="font-medium text-[#333446]">Hari yang Melelahkan</h4>
-          <span class="text-xs text-[#758b96]">Kemarin</span>
-        </div>
-        <p class="text-sm text-[#758b96] line-clamp-2">Hari ini sangat melelahkan dengan semua deadline yang menumpuk. Aku merasa kewalahan tapi mencoba untuk tetap tenang...</p>
-        <div class="flex mt-2">
-          <span class="bg-[#E6F2F2] text-xs px-2 py-1 rounded-full mr-2 text-[#333446]">#stres</span>
-          <span class="bg-[#E6F2F2] text-xs px-2 py-1 rounded-full text-[#333446]">#pekerjaan</span>
-        </div>
-      </div>
-      <div class="border-b border-[#E6F2F2] pb-4">
-        <div class="flex justify-between items-start mb-1">
-          <h4 class="font-medium text-[#333446]">Momen Bahagia</h4>
-          <span class="text-xs text-[#758b96]">2 hari lalu</span>
-        </div>
-        <p class="text-sm text-[#758b96] line-clamp-2">Akhirnya bertemu dengan teman-teman setelah sekian lama. Tertawa bersama membuatku merasa lebih ringan...</p>
-        <div class="flex mt-2">
-          <span class="bg-[#E6F2F2] text-xs px-2 py-1 rounded-full mr-2 text-[#333446]">#bahagia</span>
-          <span class="bg-[#E6F2F2] text-xs px-2 py-1 rounded-full text-[#333446]">#teman</span>
-        </div>
-      </div>
+    <div class="space-y-4" id="recentJournals">
+      <!-- Bagian ini dikosongkan, akan diisi oleh JS -->
     </div>
   </div>
 
@@ -251,5 +232,4 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/dashboard.js"></script>
-
 </html>

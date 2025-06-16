@@ -272,5 +272,13 @@
 </main>
 
 <script src="assets/js/chat.js"></script>
+<script>
+// Update avatar in chat if changed from profile
+window.addEventListener("storage", function(e) {
+  if (e.key === "avatar" || e.key === "name") {
+    // No need to update existing messages, new messages will use updated avatar
+  }
+});
+</script>
 </body>
 </html>
