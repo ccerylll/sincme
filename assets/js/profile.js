@@ -102,17 +102,17 @@ document.getElementById("profileForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
-  const bio = document.getElementById("bio").value.trim();
+  const bio = document.getElementById("bio").value.trim(); // Optional
   const mood = document.getElementById("mood").value.trim();
 
-  if (!name || !email || !bio || !mood) {
-    alert("Semua kolom harus diisi!");
+  if (!name || !email || !mood) { // Remove bio from validation
+    alert("Nama, Email, dan Mood harus diisi!");
     return;
   }
 
   localStorage.setItem("name", name);
   localStorage.setItem("email", email);
-  localStorage.setItem("bio", bio);
+  localStorage.setItem("bio", bio); // Still save bio if provided
   localStorage.setItem("mood", mood);
 
   document.getElementById("displayName").textContent = name;
