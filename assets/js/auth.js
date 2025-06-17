@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Memproses...';
     submitButton.disabled = true;
   
-    fetch("http://10.1.73.105:8080/api/auth/login", {
+    fetch("http://localhost:8080/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -102,7 +102,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (token && token.length > 10) {
           localStorage.setItem("token", token);
           showAlert("success", "Login berhasil! Mengarahkan ke dashboard...");
-          window.location.href = 'dashboard.html';
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 2000); // 2 detik
         } else {
           showAlert("error", "Login gagal. Email/password salah?");
         }
@@ -123,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Membuat akun...';
     submitButton.disabled = true;
   
-    fetch("http://10.1.73.105:8080/api/auth/register", {
+    fetch("http://localhost:8080/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -135,10 +137,13 @@ document.addEventListener('DOMContentLoaded', function () {
         password
       })
     })
-      .then(res => res.json())
+      .then(res => res.text())
       .then(data => {
         console.log("Registrasi berhasil:", data);
-        showAlert("success", "Registrasi berhasil! Silakan login.");
+        showAlert("success", "Registrasi berhasil! Mengarah ke halaman login...");
+        setTimeout(() => {
+          window.location.href = 'auth.html?action=login';
+        }, 1500);
       })
       .catch(err => {
         console.error("Gagal daftar:", err);
