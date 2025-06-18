@@ -1,6 +1,5 @@
 /* ========= 1.  GLOBALS & STORAGE HELPERS  ============================ */
 let weeklyMoodChart, moodDistChart;
-let moodEntries = loadJSON('moodEntries', []);       // [{date:'YYYY-MM-DD', mood:3, note:'…'}]
 let currentWeekOffset = 0; // 0 = minggu ini, -1 = minggu lalu, dst
 
 function loadJSON (key, fallback) {
@@ -12,57 +11,137 @@ function saveJSON (key, val) {
 }
 
 /* ========= 2.  ENTRY CRUD  ========================================== */
-function addMoodEntry (moodVal, noteText) {
-  const today = new Date();
-  const dateStr = today.toISOString().slice(0,10);   // YYYY-MM-DD
+async function addMoodEntry(moodVal, noteText) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Kamu belum login.");
+    return;
+  }
 
-  /* Replace existing entry for today (one per day) */
-  moodEntries = moodEntries.filter(e => e.date !== dateStr);
-  moodEntries.push({ date: dateStr, mood: moodVal, note: noteText.trim() });
-  saveJSON('moodEntries', moodEntries);
+  const today = new Date();
+  const moodDate = today.toISOString().slice(0, 10); // YYYY-MM-DD
+
+  try {
+    const response = await fetch("http://localhost:8080/api/mood", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        moodDate: moodDate,
+        moodValue: moodVal,
+        note: noteText.trim()
+      })
+    });
+
+    if (response.status === 409) {
+      alert("Mood hari ini sudah disimpan sebelumnya.");
+      return;
+    } else if (!response.ok) {
+      alert("Gagal menyimpan mood. Silakan coba lagi.");
+      throw new Error("Gagal simpan mood");
+    }
+
+    const result = await response.json();
+    console.log("Mood tersimpan:", result);
+  } catch (error) {
+    console.error("Gagal simpan mood:", error);
+  }
 }
 
 /* ========= 3.  DERIVED DATA  ======================================== */
-function getWeeklySeries(weekOffset = 0) {
-  const data   = [];
-  const labels = [];
-  const today  = new Date();
+async function getWeeklySeries(weekOffset = 0) {
+  const token = localStorage.getItem("token");
+  if (!token) return { labels: [], data: [] };
 
-  // Hitung Senin minggu yang diinginkan
-  const day = today.getDay(); // 0 = Minggu, 1 = Senin, ..., 6 = Sabtu
+  const today = new Date();
+  const day = today.getDay(); // 0 = Minggu, 1 = Senin, ...
   const monday = new Date(today);
   monday.setDate(today.getDate() - ((day + 6) % 7) + (weekOffset * 7));
-  // Cari hari Minggu minggu ini
-  // const sunday = new Date(monday);
-  // sunday.setDate(monday.getDate() + 6);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
 
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(monday);
-    d.setDate(monday.getDate() + i);
+  const startDate = monday.toISOString().slice(0, 10);
+  const endDate = sunday.toISOString().slice(0, 10);
 
-    const dayLabel = d.toLocaleDateString('id-ID', { weekday: 'short' }); // Sen, Sel, …
-    labels.push(dayLabel);
+  try {
+    const response = await fetch(`http://localhost:8080/api/mood/weekly?startDate=${startDate}&endDate=${endDate}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
 
-    const dateKey  = d.toISOString().slice(0,10);
-    const entryForDay = moodEntries.find(e => e.date === dateKey);
-    data.push(entryForDay ? entryForDay.mood : null); // null = gap
+    if (!response.ok) throw new Error("Gagal ambil data weekly");
+
+    const moods = await response.json(); // array of mood
+
+    const data = [];
+    const labels = [];
+
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+
+      const dateStr = d.toISOString().slice(0, 10);
+      const dayLabel = d.toLocaleDateString('id-ID', { weekday: 'short' });
+      labels.push(dayLabel);
+
+      const found = moods.find(e => e.moodDate === dateStr);
+      data.push(found ? found.moodValue : null);
+    }
+
+    return { labels, data };
+
+  } catch (error) {
+    console.error("Weekly mood error:", error);
+    return { labels: [], data: [] };
   }
-  return { labels, data };
 }
 
-function getDistributionCounts () {
-  const counts = [0,0,0,0,0]; // [Sangat Baik … Sangat Buruk]
-  moodEntries.forEach(e => { counts[5 - e.mood] += 1; });
-  return counts;
+async function getDistributionCounts() {
+  const token = localStorage.getItem("token");
+  if (!token) return [0, 0, 0, 0, 0];
+
+  const today = new Date();
+  const month = today.getMonth() + 1; // 0-indexed
+  const year = today.getFullYear();
+
+  try {
+    const res = await fetch(`http://localhost:8080/api/mood/monthly-distribution?month=${month}&year=${year}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (!res.ok) throw new Error("Gagal ambil distribusi mood");
+
+    const result = await res.json(); // object with moodValue as keys
+
+    // Index: [Sangat Baik, Baik, Netral, Buruk, Sangat Buruk] → mood 5..1
+    const counts = [0, 0, 0, 0, 0];
+    for (let i = 1; i <= 5; i++) {
+      const moodCount = result[i.toString()] || 0;
+      counts[5 - i] = moodCount; // mapping mood 5 → index 0, mood 1 → index 4
+    }
+
+    return counts;
+
+  } catch (err) {
+    console.error("Distribusi mood gagal:", err);
+    return [0, 0, 0, 0, 0];
+  }
 }
+
 
 /* ========= 4.  RENDER CHARTS  ======================================= */
-function initMoodCharts () {
-  const { labels, data } = getWeeklySeries(currentWeekOffset);
-  const distData         = getDistributionCounts();
+async function initMoodCharts() {
+  const { labels, data } = await getWeeklySeries(currentWeekOffset);
+  const distData = await getDistributionCounts(); // nanti kita refactor juga ini
 
   const weeklyCtx = document.getElementById('weeklyMoodChart');
-  const distCtx   = document.getElementById('moodDistributionChart');
+  const distCtx = document.getElementById('moodDistributionChart');
+
 
   /* ---- LINE (create or update) ---- */
   if (weeklyMoodChart) {
@@ -153,21 +232,35 @@ function setWeeklyRangeLabel(weekOffset = 0) {
 }
 
 /* ========= 5.  MOOD HISTORY LIST  (table version)  ================== */
-function renderMoodHistory () {
+async function renderMoodHistory() {
   const tbody = document.getElementById('moodHistoryBody');
-  if (!tbody) return;                         // element not found – bail
+  if (!tbody) return;
 
-  const emoji  = ['😭','😞','😐','😊','😁'];   // index 0 → mood 1
-  const label  = ['Sangat Buruk','Buruk','Netral','Baik','Sangat Baik'];
+  const token = localStorage.getItem("token");
+  if (!token) {
+    tbody.innerHTML = '<tr><td colspan="4">Kamu belum login.</td></tr>';
+    return;
+  }
 
-  const rowsHtml = [...moodEntries]           // clone so we can sort
-    .sort((a,b)=> b.date.localeCompare(a.date))   // newest first
-    .map(e => {
-      const d        = new Date(e.date);
-      const dateNice = d.toLocaleDateString('id-ID',
-                       { day:'2-digit', month:'short', year:'numeric' });
-      const i        = e.mood - 1;            // 1-based → 0-based
-      const note     = e.note || '';
+  try {
+    const res = await fetch("http://localhost:8080/api/mood/history", {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (!res.ok) throw new Error("Gagal ambil mood history");
+
+    const entries = await res.json(); // List<Mood>
+
+    const emoji = ['😭','😞','😐','😊','😁'];   // mood 1 → 5
+    const label = ['Sangat Buruk','Buruk','Netral','Baik','Sangat Baik'];
+
+    const rowsHtml = entries.map(e => {
+      const d = new Date(e.moodDate);
+      const dateNice = d.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
+      const i = e.moodValue - 1;
+      const note = e.note || '';
 
       return `
         <tr>
@@ -181,12 +274,16 @@ function renderMoodHistory () {
           <td class="py-3 text-sm text-gray-600">${note}</td>
           <td class="py-3 text-right"></td>
         </tr>`;
-    })
-    .join('');
+    }).join('');
 
-  tbody.innerHTML = rowsHtml ||
-    '<tr><td colspan="4" class="py-3 text-sm text-gray-500">Belum ada data</td></tr>';
+    tbody.innerHTML = rowsHtml || '<tr><td colspan="4" class="py-3 text-sm text-gray-500">Belum ada data</td></tr>';
+
+  } catch (err) {
+    console.error("Mood history error:", err);
+    tbody.innerHTML = '<tr><td colspan="4" class="py-3 text-sm text-red-500">Gagal memuat data</td></tr>';
+  }
 }
+
 
 /* ========= 6.  INITIALISATION  ======================================= */
 document.addEventListener('DOMContentLoaded', () => {
@@ -197,22 +294,24 @@ document.addEventListener('DOMContentLoaded', () => {
   moodRadios.forEach(r => r.addEventListener('change', () => { saveBtn.disabled = false; }));
 
   /* --- Save handler: add entry → refresh UI --- */
-  saveBtn.addEventListener('click', () => {
-    const sel      = document.querySelector('input[name="todayMood"]:checked');
-    const noteText = document.getElementById('moodNote').value;
+ saveBtn.addEventListener('click', async () => {
+  const sel      = document.querySelector('input[name="todayMood"]:checked');
+  const noteText = document.getElementById('moodNote').value;
 
-    if (!sel) { alert('Silakan pilih mood kamu hari ini'); return; }
+  if (!sel) { alert('Silakan pilih mood kamu hari ini'); return; }
 
-    addMoodEntry(+sel.value, noteText);
-    initMoodCharts();             // redraw both charts
-    renderMoodHistory();          // refresh list
-    setWeeklyRangeLabel(); // Tambahkan ini agar label minggu update jika user ganti tanggal sistem
+  await addMoodEntry(+sel.value, noteText);  // <== tambahkan `await`
 
-    /* Reset form */
-    sel.checked = false;
-    document.getElementById('moodNote').value = '';
-    saveBtn.disabled = true;
-  });
+  await initMoodCharts();            // redraw both charts
+  await renderMoodHistory();         // refresh list
+  setWeeklyRangeLabel();             // update label minggu
+
+  // Reset form
+  sel.checked = false;
+  document.getElementById('moodNote').value = '';
+  saveBtn.disabled = true;
+});
+
 
   // Tombol prev/next minggu (gunakan selector yang pasti)
   const prevWeekBtn = document.querySelector('.fa-chevron-left')?.closest('button');

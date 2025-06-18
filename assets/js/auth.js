@@ -120,40 +120,46 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   
   function simulateRegistration(firstName, lastName, email, password) {
-    const submitButton = document.querySelector('#registerEmailForm button[type="submit"]');
-    const originalText = submitButton.textContent;
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Membuat akun...';
-    submitButton.disabled = true;
-  
-    fetch("http://localhost:8080/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        password
-      })
+  const submitButton = document.querySelector('#registerEmailForm button[type="submit"]');
+  const originalText = submitButton.textContent;
+  submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Membuat akun...';
+  submitButton.disabled = true;
+
+  fetch("http://localhost:8080/api/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      firstName,
+      lastName,
+      email,
+      password
     })
-      .then(res => res.text())
-      .then(data => {
-        console.log("Registrasi berhasil:", data);
-        showAlert("success", "Registrasi berhasil! Mengarah ke halaman login...");
+  })
+    .then(res => res.text()) // <-- ini penting untuk ambil token dari response
+    .then(token => {
+      console.log("Registrasi berhasil:", token);
+      if (token && token.length > 10) {
+        localStorage.setItem("token", token);
+        showAlert("success", "Registrasi berhasil! Mengarahkan ke dashboard...");
         setTimeout(() => {
           window.location.href = 'auth.html?action=login';
         }, 1500);
-      })
-      .catch(err => {
-        console.error("Gagal daftar:", err);
-        showAlert("error", "Registrasi gagal. Cek koneksi / data.");
-      })
-      .finally(() => {
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      });
-  }
+      } else {
+        showAlert("error", "Registrasi gagal. Token tidak valid.");
+      }
+    })
+    .catch(err => {
+      console.error("Gagal daftar:", err);
+      showAlert("error", "Registrasi gagal. Cek koneksi / data.");
+    })
+    .finally(() => {
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+    });
+}
+
   
   function showAlert(type, message) {
     const existingAlert = document.querySelector('.auth-alert');
